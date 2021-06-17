@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.w3-input {
+  padding: 5px 0px;
+  position: relative;
+}
+input.w3-input {
+  padding: 8px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #d9d6d6;
+  width: 100%;
+}
+input.w3-input:focus {
+  outline: none;
+  border-bottom: 2px solid #1da1f2;
+}
+
+.input-border-field {
+  width: 20%;
+}
+
+.input-border {
+  display: flex;
+  padding: 5px 0px;
+  margin-left: 5px;
+  position: relative;
+}
+input.input-border {
+  padding: 5px;
+  border-style: 0.5px groove #000000;
+  border-radius: 10px;
+  width: 100%;
+}
+input.input-border:focus {
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.icon {
+  top: 6px;
+  right: 5%;
+  position: absolute;
+}
+
+button.btn {
+  width: 15%;
+  background-color: #f5b263;
+  padding: 5px 30px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  border-style: hidden;
+}
+button.btn:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

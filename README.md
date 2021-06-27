@@ -1,14 +1,13 @@
-# cra-template-tailwindcss-typescript
+## E-COMMERCE PROJECT
 
-A streamlined [Tailwind CSS](https://tailwindcss.com) template for [Create React App](https://github.com/facebook/create-react-app) in [TypeScript](https://www.typescriptlang.org/).
+## 3211 TEAM
 
-> This template installs and sets up [Tailwind CSS](https://tailwindcss.com) with TypeScript support.
+## Frontend repository
 
-## Usage
+## Authors: Ly Ngoc Nhi, Truong Cong Anh
 
-```bash
-npx create-react-app --template tailwindcss-typescript
-```
+
+A homestay booking website
 
 ## Credits
 

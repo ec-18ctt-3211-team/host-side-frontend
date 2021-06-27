@@ -1,8 +1,7 @@
-import { InlineIcon } from '@iconify/react';
-import searchOutline from '@iconify/icons-teenyicons/search-outline';
+import Searchbar from 'components/searchbar';
 
 interface Props {
-  isAuthorize: boolean;
+  isAuthorized: boolean;
 }
 
 export default function Navbar(props: Props): JSX.Element {
@@ -12,19 +11,10 @@ export default function Navbar(props: Props): JSX.Element {
         {/* <img src="#" alt="logo" className="w-10 h-10 bg-gray-300 rounded-full" /> */}
         <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
       </div>
-      <div className="mx-4 px-2 flex w-1/3 border rounded-xl items-center">
-        <div className="px-2 cursor-pointer">
-          <InlineIcon icon={searchOutline} style={{ fontSize: 'inherit' }} />
-        </div>
-        <input
-          type="text"
-          className="px-2 focus:outline-none w-full h-full"
-          placeholder="Search"
-        />
-      </div>
+      <Searchbar />
       <div className="ml-auto flex justify-center cursor-pointer items-center">
         <span className="px-4 hover:text-brown-600">Host</span>
-        {!props.isAuthorize ? (
+        {!props.isAuthorized ? (
           <div>
             <span className="px-4">Sign up</span>
             <span className="px-4">Login</span>

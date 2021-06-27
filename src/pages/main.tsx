@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Layout from 'components/layout/layout';
+import Layout from 'components/layout';
 
 export default function Main(): JSX.Element {
-  const [isAuthorize, setAuthorize] = useState(true);
+  const [isAuthorized, setAuthorize] = useState(true);
   return (
-    <Layout isAuthorize={isAuthorize}>
+    <Layout isAuthorized={isAuthorized}>
       <div></div>
     </Layout>
   );

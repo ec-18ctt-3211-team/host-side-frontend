@@ -1,15 +1,15 @@
 import React from 'react';
-import Navbar from 'components/navbar/navbar';
+import Navbar from 'components/navbar';
 
 type Props = {
-  isAuthorize: boolean;
+  isAuthorized: boolean;
   children: React.ReactNode;
 };
 
 export default function Layout(props: Props): JSX.Element {
   return (
     <div>
-      <Navbar isAuthorize={props.isAuthorize} />
+      <Navbar isAuthorized={props.isAuthorized} />
       <div className="p-8">{props.children}</div>
     </div>
   );

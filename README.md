@@ -1,7 +1,11 @@
 E-COMMERCE PROJECT
+
 3211 TEAM
+
 Frontend repository
+
 Authors: Ly Ngoc Nhi, Truong Cong Anh
+
 
 A homestay booking website
 

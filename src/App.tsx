@@ -1,10 +1,10 @@
 import React from 'react';
-import Template from 'pages/template';
+import Main from 'pages/main';
 
 function App() {
   return (
     <React.Fragment>
-      <Template />
+      <Main />
     </React.Fragment>
   );
 }

@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'rosario';
+  src: url('./font/rosario.regular.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rosario';
+  src: url('./font/rosario.bold.otf') format('otf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rosario';
+  src: url('./font/rosario.italic.otf') format('otf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'rosario';
+  src: url('./font/rosario.bold-italic.otf') format('otf');
+  font-weight: bold;
+  font-style: italic;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,12 +37,19 @@
   scrollbar-width: thin;
 }
 
+:root,
+input,
+button {
+  @apply font-custom;
+  letter-spacing: 2px;
+  line-height: 1;
+  font-size: 18px;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
 a {

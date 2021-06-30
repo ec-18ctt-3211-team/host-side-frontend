@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import leftSmallOutline from '@iconify/icons-teenyicons/left-small-outline';
 import ImageTag from './tag';
-import { IMAGES } from 'constants/locations.const';
+import { IImageTag } from 'interfaces/image-tag.interface';
 
 interface Props {
   title: string;
   limit: number;
+  images: IImageTag[];
 }
 
 export default function ImageSlider(props: Props): JSX.Element {
@@ -17,7 +18,7 @@ export default function ImageSlider(props: Props): JSX.Element {
       if (slider.start === 0) return;
       setSlider({ start: slider.start - 1, end: slider.end - 1 });
     } else {
-      if (slider.end === IMAGES.length) return;
+      if (slider.end === props.images.length) return;
       setSlider({ start: slider.start + 1, end: slider.end + 1 });
     }
   }
@@ -30,7 +31,7 @@ export default function ImageSlider(props: Props): JSX.Element {
       >
         <Icon icon={leftSmallOutline} style={{ fontSize: '30px' }} />
       </div>
-      {IMAGES.map((image, index) => {
+      {props.images.map((image, index) => {
         if (index < slider.start || index >= slider.end) return;
         return (
           <ImageTag

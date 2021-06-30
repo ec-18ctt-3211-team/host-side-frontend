@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import leftSmallOutline from '@iconify/icons-teenyicons/left-small-outline';
-import ImageTag from './image-tag';
+import ImageTag from './tag';
 import { IMAGES } from 'constants/locations.const';
 
 interface Props {
@@ -11,7 +11,6 @@ interface Props {
 
 export default function ImageSlider(props: Props): JSX.Element {
   const [slider, setSlider] = useState({ start: 0, end: props.limit });
-  const [render, setRender] = useState<JSX.Element[]>([]);
 
   function reloadImage(type: string) {
     if (type === 'left') {
@@ -23,19 +22,6 @@ export default function ImageSlider(props: Props): JSX.Element {
     }
   }
 
-  useEffect(() => {
-    const newSlider = [];
-    for (let i = slider.start; i < slider.end; i++) {
-      newSlider.push(
-        <ImageTag
-          data={{ src: IMAGES[i].src, name: IMAGES[i].name }}
-          width={100 / props.limit}
-        />,
-      );
-    }
-    setRender(newSlider);
-  }, [slider]);
-
   return (
     <div className="flex h-80 w-full relative items-center px-3">
       <div
@@ -44,7 +30,15 @@ export default function ImageSlider(props: Props): JSX.Element {
       >
         <Icon icon={leftSmallOutline} style={{ fontSize: '30px' }} />
       </div>
-      {render.map((item) => item)}
+      {IMAGES.map((image, index) => {
+        if (index < slider.start || index >= slider.end) return;
+        return (
+          <ImageTag
+            data={{ src: image.src, name: image.name }}
+            width={100 / props.limit}
+          />
+        );
+      })}
       <div
         className="w-10 h-10 bg-white flex items-center justify-center rounded-full rotate-180 absolute right-0 z-10"
         onClick={() => reloadImage('right')}

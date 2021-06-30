@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from 'components/layout';
-import ImageSlider from 'components/image-slider/image-slider';
+import ImageSlider from 'components/image-slider/slider';
 
 export default function Main(): JSX.Element {
   const [isAuthorized, setAuthorize] = useState(true);

@@ -4,14 +4,21 @@ import DivPx from 'components/divpx';
 import { ImageSlider, ImageTag } from 'components/image-slider';
 import { IMAGES, GIFTS, ROOMS } from 'constants/images.const';
 
-export default function Main(): JSX.Element {
-  const [isAuthorized, setAuthorize] = useState(true);
+interface Props {
+  isAuthorized: boolean;
+  setAuthorized: (isAuthorized: boolean) => void;
+}
+
+export default function Main(props: Props): JSX.Element {
   return (
-    <Layout isAuthorized={isAuthorized}>
+    <Layout
+      isAuthorized={props.isAuthorized}
+      setAuthorized={props.setAuthorized}
+    >
       <ImageTag data={{ src: '/images/welcome.jpg' }} width={100} />
       <DivPx size={32} />
       <div className="px-32 text-lg">Welcome to 3211,</div>
-      {!isAuthorized && (
+      {!props.isAuthorized && (
         <div className="px-32 text-lg">
           Please login or sign up to explore more!
         </div>

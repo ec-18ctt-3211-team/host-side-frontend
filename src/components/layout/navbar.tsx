@@ -2,6 +2,7 @@ import Searchbar from 'components/searchbar';
 
 interface Props {
   isAuthorized: boolean;
+  setAuthorized: (isAuthorized: boolean) => void;
 }
 
 export default function Navbar(props: Props): JSX.Element {

@@ -1,4 +1,7 @@
-import Searchbar from 'components/searchbar';
+import DivPx from 'components/divpx';
+import Searchbar from 'components/layout/searchbar';
+import { SITE_PAGES } from 'constants/pages.const';
+import { Link } from 'react-router-dom';
 
 interface Props {
   isAuthorized: boolean;
@@ -7,17 +10,20 @@ interface Props {
 
 export default function Navbar(props: Props): JSX.Element {
   return (
-    <div className="flex p-4 w-screen sticky justify-between border-b">
-      <div className="px-4 cursor-pointer">
-        {/* <img src="#" alt="logo" className="w-10 h-10 bg-gray-300 rounded-full" /> */}
-        <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-      </div>
+    <div className="flex flex-wrap p-4 w-screen sticky border-b">
+      <Link
+        to={SITE_PAGES.MAIN.path}
+        className="w-10 h-10 px-4 my-2 cursor-pointer rounded-full bg-gray-300"
+      ></Link>
+
       <Searchbar />
-      <div className="ml-auto flex justify-center cursor-pointer items-center">
+      <div className="py-2 sm:ml-auto flex flex-row-reverse sm:flex-row justify-center cursor-pointer items-center">
         <span className="px-4 hover:text-brown-600">Host</span>
+        <DivPx size={8} />
         {!props.isAuthorized ? (
           <div>
             <span className="px-4">Sign up</span>
+            <DivPx size={8} />
             <span className="px-4">Login</span>
           </div>
         ) : (

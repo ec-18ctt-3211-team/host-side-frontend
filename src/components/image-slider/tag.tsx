@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { SITE_PAGES } from 'constants/pages.const';
 import { IImageTag } from 'interfaces/image-tag.interface';
 
 interface Props {
@@ -7,10 +9,10 @@ interface Props {
 
 export default function ImageTag(props: Props): JSX.Element {
   return (
-    <a
+    <Link
+      to={SITE_PAGES.LIST_OF_ROOMS.path}
       className="px-2 relative cursor-pointer"
       style={{ width: `${props.width}%` }}
-      href={props.data.href}
     >
       <img
         src={props.data.src}
@@ -24,6 +26,6 @@ export default function ImageTag(props: Props): JSX.Element {
       <span className="absolute bottom-4 left-5 text-l text-white font-bold uppercase drop-shadow-xl">
         {props.data.name}
       </span>
-    </a>
+    </Link>
   );
 }

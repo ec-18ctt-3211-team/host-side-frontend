@@ -10,6 +10,7 @@ module.exports = {
       current: 'currentColor',
       success: '#2BA75D',
       error: '#C35757',
+      white: '#ffffff',
       brown: {
         DEFAULT: '#88604A',
         50: '#E6D9D1',

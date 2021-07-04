@@ -31,12 +31,12 @@
   text-align: justify;
 }
 
-input {
+.input-text {
   border: 2px solid #d9d6d6;
   border-radius: 10px;
   font-size: 0.9375rem;
 }
-input:focus {
+.input-tex:focus {
   outline: none;
 }
 

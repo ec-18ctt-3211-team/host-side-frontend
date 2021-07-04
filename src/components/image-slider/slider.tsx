@@ -5,9 +5,10 @@ import { ImageTag } from '.';
 import { IImageTag } from 'interfaces/image-tag.interface';
 
 interface Props {
-  title: string;
+  title?: string;
   limit: number;
   images: IImageTag[];
+  isLink?: boolean;
 }
 
 export default function ImageSlider(props: Props): JSX.Element {
@@ -25,7 +26,9 @@ export default function ImageSlider(props: Props): JSX.Element {
 
   return (
     <div className="w-full">
-      <div className="text-lg px-12 py-8 font-semibold">{props.title}</div>
+      {props.title && (
+        <div className="text-lg px-12 py-8 font-semibold">{props.title}</div>
+      )}
       <div className="flex w-full relative items-center px-3">
         <div
           className="w-10 h-10 bg-white flex items-center justify-center rounded-full absolute left-0 z-10"
@@ -39,6 +42,7 @@ export default function ImageSlider(props: Props): JSX.Element {
             <ImageTag
               data={{ src: image.src, name: image.name }}
               width={100 / props.limit}
+              isLink={props.isLink}
             />
           );
         })}

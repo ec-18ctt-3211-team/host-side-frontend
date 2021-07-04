@@ -28,11 +28,17 @@ export default function Main(props: Props): JSX.Element {
         title="SIGNIFICANT PLACES TO STAY"
         limit={5}
         images={IMAGES}
+        isLink={true}
       />
       <DivPx size={48} />
-      <ImageSlider title="PREFRENTIAL" limit={3} images={GIFTS} />
+      <ImageSlider title="PREFRENTIAL" limit={3} images={GIFTS} isLink={true} />
       <DivPx size={48} />
-      <ImageSlider title="RECOMMENDED By 3211" limit={4} images={ROOMS} />
+      <ImageSlider
+        title="RECOMMENDED By 3211"
+        limit={4}
+        images={ROOMS}
+        isLink={true}
+      />
     </Layout>
   );
 }

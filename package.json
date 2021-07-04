@@ -9,6 +9,7 @@
     "@types/react-dom": "^17.0.7",
     "autoprefixer": "10.x",
     "cross-env": "7.x",
+    "npm": "^7.19.1",
     "npm-run-all": "4.x",
     "postcss": "8.x",
     "postcss-cli": "8.x",

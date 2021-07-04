@@ -4,6 +4,7 @@ import { RoomCard } from 'components/list_of_rooms/room-card';
 import { RoomDetail } from 'interfaces/room-card.interface';
 import { Pagination } from 'components/list_of_rooms/pagination';
 import { useState } from 'react';
+import { SITE_PAGES } from 'constants/pages.const';
 
 interface Props {
   isAuthorized: boolean;
@@ -16,120 +17,140 @@ const data: RoomDetail[] = [
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
   {
     room_name: 'LUXURY HOMESTAY',
     room_type: 'Homestay',
     total_bedrooms: '2',
     price: 100,
+    src: '/images/homestays/homestay1.jpg',
   },
 ];
 

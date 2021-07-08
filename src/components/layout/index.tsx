@@ -6,6 +6,7 @@ type Props = {
   isAuthorized: boolean;
   setAuthorized: (isAuthorized: boolean) => void;
   children: React.ReactNode;
+  allowSearch?: boolean;
 };
 
 export default function Layout(props: Props): JSX.Element {
@@ -14,6 +15,7 @@ export default function Layout(props: Props): JSX.Element {
       <Navbar
         isAuthorized={props.isAuthorized}
         setAuthorized={props.setAuthorized}
+        allowSearch={props.allowSearch}
       />
       <div className="p-8">{props.children}</div>
       <Footer />

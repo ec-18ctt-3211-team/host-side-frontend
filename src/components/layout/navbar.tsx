@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 interface Props {
   isAuthorized: boolean;
   setAuthorized: (isAuthorized: boolean) => void;
+  allowSearch?: boolean;
 }
 
 export default function Navbar(props: Props): JSX.Element {
@@ -16,7 +17,7 @@ export default function Navbar(props: Props): JSX.Element {
         className="w-10 h-10 px-4 my-2 cursor-pointer rounded-full bg-gray-300"
       ></Link>
 
-      <Searchbar />
+      {props.allowSearch && <Searchbar />}
       <div className="py-2 sm:ml-auto flex flex-row-reverse sm:flex-row justify-center cursor-pointer items-center">
         <span className="px-4 hover:text-brown-600">Host</span>
         <DivPx size={8} />

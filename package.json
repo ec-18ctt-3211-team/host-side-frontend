@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.14.5",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.11",

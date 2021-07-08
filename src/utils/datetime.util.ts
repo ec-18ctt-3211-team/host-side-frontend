@@ -1,6 +1,12 @@
-import { dateTimeFormatter } from './formatter.util';
+export const getDateString = (date: Date) => {
+  return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+};
 
-type Timestamp = string | number | Date;
-type DateFormat = 'numeric' | '2-digit' | 'long' | 'short' | 'narrow';
-
-export const DateTime = {};
+export const formatDateString = (date: string) => {
+  const str = date.split('/');
+  const result = new Date();
+  result.setDate(parseInt(str[0]));
+  result.setMonth(parseInt(str[1]));
+  result.setFullYear(parseInt(str[2]));
+  return result;
+};

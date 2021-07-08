@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import Main from 'pages/main';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ListOfRooms from 'pages/list-of-rooms';
 import { SITE_PAGES } from 'constants/pages.const';
-import Viewaplace from 'pages/view-a-place';
+import Pages from './pages';
 
 function App() {
   const [isAuthorized, setAuthorized] = useState(true);
@@ -11,16 +9,34 @@ function App() {
     <Router>
       <Switch>
         <Route exact path={SITE_PAGES.MAIN.path}>
-          <Main isAuthorized={isAuthorized} setAuthorized={setAuthorized} />
+          <Pages.Main
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
         </Route>
         <Route path={SITE_PAGES.LIST_OF_ROOMS.path}>
-          <ListOfRooms
+          <Pages.ListOfRooms
             isAuthorized={isAuthorized}
             setAuthorized={setAuthorized}
           />
         </Route>
         <Route path={SITE_PAGES.VIEW_A_PLACE.path}>
-          <Viewaplace />
+          <Pages.Viewaplace
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route path={SITE_PAGES.ROOMS_OF_HOST.path}>
+          <Pages.RoomsOfHost
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route path={SITE_PAGES.CONFIRM_BOOKING.path}>
+          <Pages.ConfirmBooking
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
         </Route>
         <Route path="*">
           <div>ERROR!!!</div>

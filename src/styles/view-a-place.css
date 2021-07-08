@@ -23,26 +23,19 @@
   font-size: 1rem;
 }
 
-.intro {
-  margin-top: 2.5rem;
-}
-.intro > p {
-  font-size: 1rem;
-  text-align: justify;
-}
-
 .input-text {
+  width: 100%;
   border: 2px solid #d9d6d6;
   border-radius: 10px;
   font-size: 0.9375rem;
 }
-.input-tex:focus {
+.input-text:focus {
   outline: none;
 }
 
 .dialogue {
   margin-right: 3%;
-  flex: 5;
+  flex: 3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,6 +88,5 @@
 }
 
 #price {
-  font-weight: 700;
   font-size: 1.75rem;
 }

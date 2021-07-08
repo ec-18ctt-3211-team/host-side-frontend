@@ -14,6 +14,7 @@ export default function Main(props: Props): JSX.Element {
     <Layout
       isAuthorized={props.isAuthorized}
       setAuthorized={props.setAuthorized}
+      allowSearch
     >
       <ImageTag data={{ src: '/images/welcome.jpg' }} width={100} />
       <DivPx size={32} />

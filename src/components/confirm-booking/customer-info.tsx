@@ -1,11 +1,14 @@
 import DivPx from 'components/divpx';
 import Input from 'components/input/input';
+import { ICustomerInfo } from 'interfaces/booking.interface';
 
 interface Props {
   customer_name?: string;
   phone_number?: string;
   email?: string;
   payment_method?: string;
+  customerInfo: ICustomerInfo;
+  setCustomerInfo: (detail: ICustomerInfo) => void;
 }
 
 export default function CustomerInfo(props: Props): JSX.Element {
@@ -18,6 +21,12 @@ export default function CustomerInfo(props: Props): JSX.Element {
           type="text"
           value={props.customer_name}
           label={{ value: 'customer name', position: 'top' }}
+          onChange={(e) =>
+            props.setCustomerInfo({
+              ...props.customerInfo,
+              customer_name: e.target.value,
+            })
+          }
         />
         <DivPx size={28} />
         <div className="w-3/4">
@@ -26,6 +35,12 @@ export default function CustomerInfo(props: Props): JSX.Element {
             type="text"
             value={props.phone_number}
             label={{ value: 'phone number', position: 'top' }}
+            onChange={(e) =>
+              props.setCustomerInfo({
+                ...props.customerInfo,
+                phone_number: e.target.value,
+              })
+            }
           />
         </div>
         <DivPx size={28} />
@@ -34,6 +49,12 @@ export default function CustomerInfo(props: Props): JSX.Element {
           type="text"
           value={props.email}
           label={{ value: 'email', position: 'top' }}
+          onChange={(e) =>
+            props.setCustomerInfo({
+              ...props.customerInfo,
+              email: e.target.value,
+            })
+          }
         />
         <DivPx size={28} />
         <Input
@@ -41,6 +62,12 @@ export default function CustomerInfo(props: Props): JSX.Element {
           type="text"
           value={props.payment_method}
           label={{ value: 'payment method', position: 'top' }}
+          onChange={(e) =>
+            props.setCustomerInfo({
+              ...props.customerInfo,
+              payment_method: e.target.value,
+            })
+          }
         />
       </div>
     </div>

@@ -12,6 +12,7 @@ interface Props {
   classname?: string;
   label?: { value: string; position: positionType };
   icon?: { icon: React.ReactNode; position: positionType };
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function Input(props: Props): JSX.Element {
@@ -51,6 +52,7 @@ export default function Input(props: Props): JSX.Element {
             placeholder={props.placeholder}
             className="w-full px-4 focus:outline-none"
             defaultValue={props.value?.toString()}
+            onChange={props.onChange}
           />
 
           {/* right icon  */}

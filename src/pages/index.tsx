@@ -3,6 +3,8 @@ import RoomsOfHost from 'pages/rooms-of-host';
 import ConfirmBooking from 'pages/confirm-booking';
 import ListOfRooms from 'pages/list-of-rooms';
 import Main from 'pages/main';
+import BookingHistory from 'pages/booking-history';
+import UserProfile from './user-profile';
 
 const Pages = {
   Viewaplace,
@@ -10,6 +12,8 @@ const Pages = {
   ConfirmBooking,
   ListOfRooms,
   Main,
+  BookingHistory,
+  UserProfile,
 };
 
 export default Pages;

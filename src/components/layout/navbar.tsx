@@ -28,7 +28,8 @@ export default function Navbar(props: Props): JSX.Element {
             <span className="px-4">Login</span>
           </div>
         ) : (
-          <div
+          <Link
+            to={SITE_PAGES.USER_PROFILE.path}
             className={[
               'p-2 flex items-center rounded-3xl',
               'text-brown-600 bg-brown-100',
@@ -38,7 +39,7 @@ export default function Navbar(props: Props): JSX.Element {
             {/* <img src="#" alt="user-img" className="w-6 h-6 bg-gray-300 rounded-full" /> */}
             <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
             <span className="px-2">Username</span>
-          </div>
+          </Link>
         )}
       </div>
     </div>

@@ -38,6 +38,18 @@ function App() {
             setAuthorized={setAuthorized}
           />
         </Route>
+        <Route path={SITE_PAGES.BOOKING_HISTORY.path}>
+          <Pages.BookingHistory
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route path={SITE_PAGES.USER_PROFILE.path}>
+          <Pages.UserProfile
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
         <Route path="*">
           <div>ERROR!!!</div>
         </Route>

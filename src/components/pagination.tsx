@@ -21,7 +21,7 @@ export const PaginationItem = (props: {
   return (
     <div
       className={[
-        'rounded-full m-1 w-8 h-8 flex justify-center items-center',
+        'rounded-full m-1 w-8 h-8 flex justify-center items-center select-none',
         props.isChosen ? 'bg-gray-900 text-white' : '',
         props.isDisable ? 'bg-gray-300 text-gray-600' : '',
         props.isIcon ? 'border' : '',

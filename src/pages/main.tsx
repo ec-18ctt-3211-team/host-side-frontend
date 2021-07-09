@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import Layout from 'components/common/layout';
-import DivPx from 'components/common/divpx';
-import { ImageSlider, ImageTag } from 'components/common/image-slider';
+import { Layout, DivPx, ImageSlider, ImageTag } from 'components/common';
 import { IMAGES, GIFTS, ROOMS } from 'constants/images.const';
 
 interface Props {

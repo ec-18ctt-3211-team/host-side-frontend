@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Pagination } from 'components/common/pagination';
+import { Pagination } from 'components/common';
 import { IBookingTable } from 'interfaces/user.interface';
+import { Link } from 'react-router-dom';
+import { SITE_PAGES } from 'constants/pages.const';
 
 interface Props {
   booking_history: IBookingTable[];
@@ -29,7 +31,9 @@ export default function BookingTable(props: Props) {
               }
             >
               <td className="border-r py-6">{item.orderID}</td>
-              <td className="border-r py-6">{item.roomID}</td>
+              <td className="border-r py-6">
+                <Link to={SITE_PAGES.BOOKING_HISTORY.path}>{item.roomID}</Link>
+              </td>
               <td className={['py-6', item.order_status.color].join(' ')}>
                 {item.order_status.label}
               </td>

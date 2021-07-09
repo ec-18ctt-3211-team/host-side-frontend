@@ -1,7 +1,6 @@
-import DivPx from 'components/common/divpx';
-import Searchbar from 'components/common/layout/searchbar';
-import { SITE_PAGES } from 'constants/pages.const';
 import { Link } from 'react-router-dom';
+import { Searchbar, DivPx } from 'components/common';
+import { SITE_PAGES } from 'constants/pages.const';
 
 interface Props {
   isAuthorized: boolean;

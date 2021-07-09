@@ -1,7 +1,7 @@
-import Button from 'components/common/button/Button';
+import { Button } from 'components/common';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 import { IRoomDetail } from 'interfaces/room.interface';
-import { getDateString } from 'utils/datetime.util';
+import { getDateString } from 'utils/datetime.utils';
 
 interface Props {
   customer: ICustomerInfo;
@@ -9,7 +9,7 @@ interface Props {
   room: IRoomDetail;
 }
 
-export default function ConfirmTag(props: Props): JSX.Element {
+export default function ReviewInfo(props: Props): JSX.Element {
   return (
     <div className="h-[500px] w-[400px] flex flex-col items-center justify-evenly p-8 rounded-xl shadow-lg">
       <div className="font-bold text-xl uppercase">{props.room.room_name}</div>
@@ -41,7 +41,9 @@ export default function ConfirmTag(props: Props): JSX.Element {
         <strong>Payment method:</strong>
         <div className="uppercase">{props.customer.payment_method}</div>
       </div>
-      <Button>Confirm</Button>
+      <div className="w-2/3 h-12">
+        <Button>Confirm</Button>
+      </div>
     </div>
   );
 }

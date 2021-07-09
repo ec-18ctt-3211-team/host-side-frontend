@@ -1,6 +1,6 @@
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 import { IRoomDetail } from 'interfaces/room.interface';
-import { getDateString } from 'utils/datetime.util';
+import { getDateString } from 'utils/datetime.utils';
 
 interface Props {
   customer: ICustomerInfo;
@@ -8,7 +8,7 @@ interface Props {
   room: IRoomDetail;
 }
 
-export default function ConfirmTag(props: Props): JSX.Element {
+export default function BriefInfo(props: Props): JSX.Element {
   const price = 0;
   return (
     <div className="h-[500px] w-[400px] flex flex-col items-center justify-evenly p-8 rounded-xl shadow-lg">

@@ -1,15 +1,14 @@
 import { SITE_PAGES } from 'constants/pages.const';
 import { useEffect, useState } from 'react';
-import { formatDateString, getDateString } from 'utils/datetime.util';
-import Input from 'components/common/input/input';
+import { getDateString } from 'utils/datetime.utils';
 import { Link } from 'react-router-dom';
-import Button from 'components/common/button/Button';
+import { Button, Input } from 'components/common';
 
 interface Props {
   price: number;
 }
 
-export default function BookDialogue(props: Props): JSX.Element {
+export default function Dialogue(props: Props): JSX.Element {
   const [total, setTotal] = useState(props.price);
   const [dayStart, setStart] = useState(new Date());
   const [dayEnd, setEnd] = useState(new Date());

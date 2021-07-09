@@ -1,7 +1,7 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
 import { IImageTag } from 'interfaces/image-tag.interface';
-import React from 'react';
 
 interface Props {
   data: IImageTag;

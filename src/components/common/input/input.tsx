@@ -1,5 +1,4 @@
-import DivPx from 'components/common/divpx';
-import { inputType, borderType, positionType } from '.';
+import { inputType, borderType, positionType, DivPx } from 'components/common';
 
 interface Props {
   border: borderType;

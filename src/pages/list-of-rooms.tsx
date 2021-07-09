@@ -1,8 +1,6 @@
-import FilterBar from 'components/section/list_of_rooms/filterbar';
-import Layout from 'components/common/layout';
-import { RoomCard } from 'components/section/list_of_rooms/room-card';
-import { Pagination } from 'components/common/pagination';
 import { useState } from 'react';
+import { Layout, Pagination } from 'components/common';
+import { Filterbar, RoomCard } from 'components/section/list_of_rooms';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { SITE_PAGES } from 'constants/pages.const';
 
@@ -19,7 +17,7 @@ export default function ListOfRooms(props: Props): JSX.Element {
       setAuthorized={props.setAuthorized}
       allowSearch
     >
-      <FilterBar location="Ho Chi Minh city" total_result={1234} />
+      <Filterbar location="Ho Chi Minh city" total_result={1234} />
       <div className="flex flex-wrap w-full px-6">
         {ROOMS_DATA.map((room, index) => {
           return (

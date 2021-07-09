@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import Layout from 'components/common/layout';
-import { ImageSlider } from 'components/common/image-slider';
+import { Layout, ImageSlider, DivPx } from 'components/common';
+import { RoomDetail, Dialogue } from 'components/section/view-a-place';
 import { ROOMS } from 'constants/images.const';
-import DivPx from 'components/common/divpx';
-import RoomDetail from 'components/section/view-a-place/room-detail';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
-import BookDialogue from 'components/section/view-a-place/booking-dialogue';
 
 interface Props {
   isAuthorized: boolean;
@@ -26,7 +22,7 @@ export default function ViewAPlace(props: Props): JSX.Element {
           <RoomDetail detail={ROOMS_DATA[0]} />
         </div>
         <div className="w-2/3 lg:w-2/5">
-          <BookDialogue price={ROOMS_DATA[0].price} />
+          <Dialogue price={ROOMS_DATA[0].price} />
         </div>
       </div>
     </Layout>

@@ -1,7 +1,5 @@
-import { Icon } from '@iconify/react';
-import leftSmallOutline from '@iconify/icons-teenyicons/left-small-outline';
-import moreHorizontalSolid from '@iconify/icons-teenyicons/more-horizontal-solid';
 import React, { useEffect, useState } from 'react';
+import { Icon, leftSmallOutline, moreHorizontalSolid } from 'utils/icon.utils';
 
 const LIMIT = 5;
 

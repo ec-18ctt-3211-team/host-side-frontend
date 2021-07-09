@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from 'components/common/layout/navbar';
-import Footer from 'components/common/layout/footer';
+import Navbar from './navbar';
+import Footer from './footer';
 
 type Props = {
   isAuthorized: boolean;

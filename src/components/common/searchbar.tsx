@@ -1,6 +1,5 @@
-import { InlineIcon } from '@iconify/react';
-import searchOutline from '@iconify/icons-teenyicons/search-outline';
-import Input from 'components/common/input/input';
+import { Input } from 'components/common';
+import { InlineIcon, searchOutline } from 'utils/icon.utils';
 
 export default function Searchbar(): JSX.Element {
   return (

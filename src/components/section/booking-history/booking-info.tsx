@@ -1,6 +1,5 @@
-import DivPx from 'components/common/divpx';
-import Input from 'components/common/input/input';
-import { getDateString } from 'utils/datetime.util';
+import { DivPx } from 'components/common';
+import { getDateString } from 'utils/datetime.utils';
 import { IBookingInfo } from 'interfaces/booking.interface';
 
 interface Props {

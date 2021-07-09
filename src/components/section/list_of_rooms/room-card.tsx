@@ -5,7 +5,7 @@ interface Props {
   detail: IRoomDetail;
 }
 
-export const RoomCard = (props: Props): JSX.Element => {
+const RoomCard = (props: Props): JSX.Element => {
   return (
     <Link
       to={props.detail.path || '*'}
@@ -32,3 +32,5 @@ export const RoomCard = (props: Props): JSX.Element => {
     </Link>
   );
 };
+
+export default RoomCard;

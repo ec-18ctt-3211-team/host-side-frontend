@@ -1,7 +1,9 @@
-import Layout from 'components/common/layout';
-import BookingInfo from 'components/section/booking-history/booking-info';
-import CustomerInfo from 'components/section/booking-history/customer-info';
-import ConfirmTag from 'components/section/booking-history/confirm-tag';
+import { Layout } from 'components/common';
+import {
+  BookingInfo,
+  BriefInfo,
+  CustomerInfo,
+} from 'components/section/booking-history';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 
@@ -39,7 +41,7 @@ export default function BookingHistory(props: Props): JSX.Element {
         </div>
 
         {/* confirm data */}
-        <ConfirmTag
+        <BriefInfo
           bookingDetail={bookingDetail}
           customer={customerInfo}
           room={ROOMS_DATA[0]}

@@ -1,7 +1,10 @@
-import { Icon, InlineIcon } from '@iconify/react';
-import DivPx from '../../common/divpx';
-import filterOutline from '@iconify/icons-teenyicons/filter-outline';
-import downSmallOutline from '@iconify/icons-teenyicons/down-small-outline';
+import { DivPx } from 'components/common';
+import {
+  Icon,
+  InlineIcon,
+  filterOutline,
+  downSmallOutline,
+} from 'utils/icon.utils';
 
 interface Props {
   location: string;

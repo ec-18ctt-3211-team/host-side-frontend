@@ -1,11 +1,12 @@
 import { IUserInfo } from 'interfaces/user.interface';
-import Input from 'components/common/input/input';
-import Button from 'components/common/button/Button';
-import { Icon } from '@iconify/react';
-import envelopeOutline from '@iconify/icons-teenyicons/envelope-outline';
-import userSolid from '@iconify/icons-teenyicons/user-solid';
-import phoneOutline from '@iconify/icons-teenyicons/phone-outline';
-import passwordOutline from '@iconify/icons-teenyicons/password-outline';
+import { Button, Input } from 'components/common';
+import {
+  Icon,
+  envelopeOutline,
+  userSolid,
+  phoneOutline,
+  passwordOutline,
+} from 'utils/icon.utils';
 
 interface Props {
   userProfile: IUserInfo;

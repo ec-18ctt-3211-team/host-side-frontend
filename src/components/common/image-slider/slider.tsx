@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Icon } from '@iconify/react';
-import leftSmallOutline from '@iconify/icons-teenyicons/left-small-outline';
-import { ImageTag } from '.';
+import { ImageTag } from 'components/common';
 import { IImageTag } from 'interfaces/image-tag.interface';
+import { Icon, leftSmallOutline } from 'utils/icon.utils';
 
 interface Props {
   title?: string;

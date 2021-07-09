@@ -1,5 +1,4 @@
-import DivPx from 'components/common/divpx';
-import Input from 'components/common/input/input';
+import { DivPx, Input } from 'components/common';
 import { ICustomerInfo } from 'interfaces/booking.interface';
 
 interface Props {

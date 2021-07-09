@@ -1,4 +1,4 @@
-import { borderType } from '.';
+import { borderType } from 'components/common';
 
 interface Props {
   border: borderType;

@@ -1,6 +1,6 @@
 import { IUserInfo } from 'interfaces/user.interface';
-import Input from 'components/input/input';
-import Button from 'components/button/Button';
+import Input from 'components/common/input/input';
+import Button from 'components/common/button/Button';
 import { Icon } from '@iconify/react';
 import envelopeOutline from '@iconify/icons-teenyicons/envelope-outline';
 import userSolid from '@iconify/icons-teenyicons/user-solid';

@@ -1,5 +1,5 @@
-import DivPx from 'components/divpx';
-import Searchbar from 'components/layout/searchbar';
+import DivPx from 'components/common/divpx';
+import Searchbar from 'components/common/layout/searchbar';
 import { SITE_PAGES } from 'constants/pages.const';
 import { Link } from 'react-router-dom';
 

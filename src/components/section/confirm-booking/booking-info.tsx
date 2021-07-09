@@ -1,5 +1,5 @@
-import DivPx from 'components/divpx';
-import Input from 'components/input/input';
+import DivPx from 'components/common/divpx';
+import Input from 'components/common/input/input';
 import { getDateString, formatDateString } from 'utils/datetime.util';
 import { IBookingInfo } from 'interfaces/booking.interface';
 
@@ -20,7 +20,7 @@ export default function BookingInfo(props: Props): JSX.Element {
       <div className="p-4 flex justify-between flex-wrap">
         <Input
           border="line"
-          type="number"
+          type="text"
           value={props.totalAdults}
           label={{ value: 'adults', position: 'right' }}
           onChange={(e) =>
@@ -32,7 +32,7 @@ export default function BookingInfo(props: Props): JSX.Element {
         />
         <Input
           border="line"
-          type="number"
+          type="text"
           value={props.totalKids || 0}
           label={{ value: 'kids', position: 'right' }}
           onChange={(e) =>

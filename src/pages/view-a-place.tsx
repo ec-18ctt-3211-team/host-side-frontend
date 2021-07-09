@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Layout from 'components/layout';
-import { ImageSlider } from 'components/image-slider';
+import Layout from 'components/common/layout';
+import { ImageSlider } from 'components/common/image-slider';
 import { ROOMS } from 'constants/images.const';
-import DivPx from 'components/divpx';
-import RoomDetail from 'components/view-a-place/room-detail';
+import DivPx from 'components/common/divpx';
+import RoomDetail from 'components/section/view-a-place/room-detail';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
-import BookDialogue from 'components/view-a-place/booking-dialogue';
+import BookDialogue from 'components/section/view-a-place/booking-dialogue';
 
 interface Props {
   isAuthorized: boolean;

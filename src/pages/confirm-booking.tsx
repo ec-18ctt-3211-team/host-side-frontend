@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Layout from 'components/layout';
-import BookingInfo from 'components/confirm-booking/booking-info';
-import CustomerInfo from 'components/confirm-booking/customer-info';
-import ConfirmTag from 'components/confirm-booking/confirm-tag';
+import Layout from 'components/common/layout';
+import BookingInfo from 'components/section/confirm-booking/booking-info';
+import CustomerInfo from 'components/section/confirm-booking/customer-info';
+import ConfirmTag from 'components/section/confirm-booking/confirm-tag';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Layout from 'components/layout';
-import BookingTable from 'components/user-profile/booking-table';
-import UserInfo from 'components/user-profile/user-info';
-import DivPx from 'components/divpx';
+import Layout from 'components/common/layout';
+import BookingTable from 'components/section/user-profile/booking-table';
+import UserInfo from 'components/section/user-profile/user-info';
+import DivPx from 'components/common/divpx';
 
 interface Props {
   isAuthorized: boolean;

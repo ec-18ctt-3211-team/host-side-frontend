@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pagination } from 'components/pagination';
+import { Pagination } from 'components/common/pagination';
 import { IBookingTable } from 'interfaces/user.interface';
 
 interface Props {

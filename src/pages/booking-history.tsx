@@ -1,7 +1,7 @@
-import Layout from 'components/layout';
-import BookingInfo from 'components/booking-history/booking-info';
-import CustomerInfo from 'components/booking-history/customer-info';
-import ConfirmTag from 'components/booking-history/confirm-tag';
+import Layout from 'components/common/layout';
+import BookingInfo from 'components/section/booking-history/booking-info';
+import CustomerInfo from 'components/section/booking-history/customer-info';
+import ConfirmTag from 'components/section/booking-history/confirm-tag';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 

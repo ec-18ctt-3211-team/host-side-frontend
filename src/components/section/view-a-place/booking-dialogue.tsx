@@ -1,9 +1,9 @@
 import { SITE_PAGES } from 'constants/pages.const';
 import { useEffect, useState } from 'react';
 import { formatDateString, getDateString } from 'utils/datetime.util';
-import Input from 'components/input/input';
+import Input from 'components/common/input/input';
 import { Link } from 'react-router-dom';
-import Button from 'components/button/Button';
+import Button from 'components/common/button/Button';
 
 interface Props {
   price: number;

@@ -1,4 +1,4 @@
-import Button from 'components/button/Button';
+import Button from 'components/common/button/Button';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { getDateString } from 'utils/datetime.util';

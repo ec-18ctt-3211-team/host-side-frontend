@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Layout from 'components/layout';
-import { RoomCard } from 'components/list_of_rooms/room-card';
+import Layout from 'components/common/layout';
+import { RoomCard } from 'components/section/list_of_rooms/room-card';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
-import { Pagination } from 'components/pagination';
+import { Pagination } from 'components/common/pagination';
 import { ROOMS } from 'constants/images.const';
 import { SITE_PAGES } from 'constants/pages.const';
 

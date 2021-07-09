@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import DivPx from '../divpx';
+import DivPx from '../../common/divpx';
 import filterOutline from '@iconify/icons-teenyicons/filter-outline';
 import downSmallOutline from '@iconify/icons-teenyicons/down-small-outline';
 

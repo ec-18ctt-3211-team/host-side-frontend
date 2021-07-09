@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Layout from 'components/layout';
 import { RoomCard } from 'components/list_of_rooms/room-card';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
-import { Pagination } from 'components/list_of_rooms/pagination';
+import { Pagination } from 'components/pagination';
 import { ROOMS } from 'constants/images.const';
 import { SITE_PAGES } from 'constants/pages.const';
 

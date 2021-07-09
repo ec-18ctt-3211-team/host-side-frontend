@@ -23,4 +23,8 @@ export const SITE_PAGES = {
     label: 'booking history',
     path: '/booking_history',
   },
+  USER_PROFILE: {
+    label: 'user profile',
+    path: '/user_profile',
+  },
 };

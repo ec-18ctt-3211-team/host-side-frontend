@@ -1,7 +1,7 @@
 import FilterBar from 'components/list_of_rooms/filterbar';
 import Layout from 'components/layout';
 import { RoomCard } from 'components/list_of_rooms/room-card';
-import { Pagination } from 'components/list_of_rooms/pagination';
+import { Pagination } from 'components/pagination';
 import { useState } from 'react';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { SITE_PAGES } from 'constants/pages.const';

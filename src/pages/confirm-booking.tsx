@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Layout from 'components/layout';
-import BookingInfo from 'components/confirm-booking/booking-info';
-import CustomerInfo from 'components/confirm-booking/customer-info';
-import ConfirmTag from 'components/confirm-booking/confirm-tag';
+import { Layout } from 'components/common';
+import {
+  BookingInfo,
+  CustomerInfo,
+  ReviewInfo,
+} from 'components/section/confirm-booking';
 import { ROOMS_DATA } from 'constants/rooms-data.const';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 
@@ -50,7 +52,7 @@ export default function ConfirmBooking(props: Props): JSX.Element {
         </div>
 
         {/* confirm data */}
-        <ConfirmTag
+        <ReviewInfo
           bookingDetail={bookingDetail}
           customer={customerInfo}
           room={ROOMS_DATA[0]}

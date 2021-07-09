@@ -1,33 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pagination } from 'components/pagination';
 import { IBookingTable } from 'interfaces/user.interface';
 
 interface Props {
   booking_history: IBookingTable[];
+  items_per_pages?: number;
 }
 
 export default function BookingTable(props: Props) {
+  const { items_per_pages = 6 } = props;
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [maxPage, setMaxPage] = useState<number>(10);
+  const [render, setRender] = useState(renderTable());
+
+  function renderTable() {
+    return (
+      <tbody className="text-center">
+        {props.booking_history.map((item, index) => {
+          if (index > items_per_pages - 1) return;
+          return (
+            <tr
+              key={item.orderID}
+              className={
+                (index > 0 && index % (items_per_pages - 1) === 0) ||
+                index === props.booking_history.length - 1
+                  ? ''
+                  : 'border-b'
+              }
+            >
+              <td className="border-r py-6">{item.orderID}</td>
+              <td className="border-r py-6">{item.roomID}</td>
+              <td className={['py-6', item.order_status.color].join(' ')}>
+                {item.order_status.label}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    );
+  }
+
+  useEffect(() => {
+    setRender(renderTable());
+  }, [currentPage]);
+
   return (
     <div className="bg-white rounded-xl shadow-lg w-full flex flex-col items-center p-6">
-      <div className="uppercase font-bold text-brown text-xl">
+      <div className="uppercase font-bold text-brown text-xl pb-8">
         Booking history
       </div>
-      <div className="flex border-b w-full justify-between uppercase">
-        <div className="border-r">id</div>
-        <div className="border-r">information</div>
-        <div className="">status</div>
-      </div>
-      {props.booking_history.map((item) => {
-        return (
-          <div className="flex border-b w-full justify-between">
-            <div className="border-r">{item.orderID}</div>
-            <div className="border-r">{item.roomID}</div>
-            <div className="">{item.order_status}</div>
-          </div>
-        );
-      })}
+
+      <table className="table-auto w-full">
+        <thead>
+          <tr className="border-b uppercase">
+            <th className="border-r py-6">ID</th>
+            <th className="border-r py-6">Booking Information</th>
+            <th className="py-6">Status</th>
+          </tr>
+        </thead>
+        {render}
+      </table>
+
       <div className="mt-auto">
         <Pagination
           currentPage={currentPage}

@@ -5,10 +5,13 @@ export interface IUserInfo {
   email: string;
 }
 
-export type OrderStatus = 'Waiting' | 'Accepted' | 'Done' | 'Denied';
+export interface IStatus {
+  label: string;
+  color: string;
+}
 
 export interface IBookingTable {
   orderID: string;
   roomID: string;
-  order_status: OrderStatus;
+  order_status: IStatus;
 }

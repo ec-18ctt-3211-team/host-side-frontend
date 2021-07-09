@@ -9,6 +9,13 @@ interface Props {
   setAuthorized: (isAuthorized: boolean) => void;
 }
 
+export const OrderStatus = {
+  waiting: { label: 'Waiting', color: 'text-gray-400' },
+  accepted: { label: 'Accepted', color: 'text-success' },
+  done: { label: 'Done', color: 'text-brown-400' },
+  denied: { label: 'Denied', color: 'text-error' },
+};
+
 export default function UserProfile(props: Props): JSX.Element {
   const [userInfo, setUserInfo] = useState({
     userID: '1234567',
@@ -26,12 +33,21 @@ export default function UserProfile(props: Props): JSX.Element {
         <DivPx size={48} />
         <BookingTable
           booking_history={[
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
-            { orderID: '#1', roomID: '123', order_status: 'Waiting' },
+            { orderID: '#1', roomID: '123', order_status: OrderStatus.waiting },
+            { orderID: '#1', roomID: '123', order_status: OrderStatus.waiting },
+            {
+              orderID: '#1',
+              roomID: '123',
+              order_status: OrderStatus.accepted,
+            },
+            { orderID: '#1', roomID: '123', order_status: OrderStatus.denied },
+            { orderID: '#1', roomID: '123', order_status: OrderStatus.done },
+            { orderID: '#1', roomID: '123', order_status: OrderStatus.denied },
+            {
+              orderID: '#1',
+              roomID: '123',
+              order_status: OrderStatus.accepted,
+            },
           ]}
         />
       </div>

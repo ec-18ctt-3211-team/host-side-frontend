@@ -1,8 +1,5 @@
 import DivPx from 'components/divpx';
-
-type borderType = 'full' | 'line';
-type inputType = 'text' | 'number' | 'date' | 'password';
-type positionType = 'left' | 'right' | 'top' | 'bottom';
+import { inputType, borderType, positionType } from '.';
 
 interface Props {
   border: borderType;

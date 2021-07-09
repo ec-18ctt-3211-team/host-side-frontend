@@ -1,3 +1,4 @@
+import Button from 'components/button/Button';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { getDateString } from 'utils/datetime.util';
@@ -40,9 +41,7 @@ export default function ConfirmTag(props: Props): JSX.Element {
         <strong>Payment method:</strong>
         <div className="uppercase">{props.customer.payment_method}</div>
       </div>
-      <button className="w-2/5 bg-brown-500 p-3 rounded-lg text-white">
-        Confirm
-      </button>
+      <Button>Confirm</Button>
     </div>
   );
 }

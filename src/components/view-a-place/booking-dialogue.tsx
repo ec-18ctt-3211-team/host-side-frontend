@@ -45,7 +45,7 @@ export default function BookDialogue(props: Props): JSX.Element {
       </div>
       <div className="flex h-1/5 w-full items-center">
         <div className="pr-3">guests:</div>
-        <Input border="full" type="number" placeholder="1 guest" />
+        <Input border="full" type="text" placeholder="1 guest" />
       </div>
       <Link to={SITE_PAGES.CONFIRM_BOOKING.path} className="w-2/3 h-1/5">
         <Button>Book now</Button>

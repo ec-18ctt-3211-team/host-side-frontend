@@ -19,4 +19,8 @@ export const SITE_PAGES = {
     label: 'confirm booking',
     path: '/confirm_booking',
   },
+  BOOKING_HISTORY: {
+    label: 'booking history',
+    path: '/booking_history',
+  },
 };

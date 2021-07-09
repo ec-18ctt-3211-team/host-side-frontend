@@ -1,9 +1,9 @@
-import { ButtonComponent } from 'components/input-text/InputText';
 import { SITE_PAGES } from 'constants/pages.const';
 import { useEffect, useState } from 'react';
-import 'styles/view-a-place.css';
 import { formatDateString, getDateString } from 'utils/datetime.util';
+import Input from 'components/input/input';
 import { Link } from 'react-router-dom';
+import Button from 'components/button/Button';
 
 interface Props {
   price: number;
@@ -13,6 +13,8 @@ export default function BookDialogue(props: Props): JSX.Element {
   const [total, setTotal] = useState(props.price);
   const [dayStart, setStart] = useState(new Date());
   const [dayEnd, setEnd] = useState(new Date());
+  const [totalAdults, setTotalAdults] = useState<number>(1);
+  const [totalKids, setTotalKids] = useState<number>(0);
 
   useEffect(() => {
     const start = dayStart.getTime();
@@ -21,37 +23,33 @@ export default function BookDialogue(props: Props): JSX.Element {
   }, [dayStart, dayEnd]);
 
   return (
-    <div className="dialogue p-4">
-      <div className="inner-dialogue">
-        <span id="price">${total} / night</span>
-        <div className="inline-mul-input">
-          <label htmlFor="dayStart"> from </label>
-          <input
-            type="date"
-            placeholder="from"
-            className="input-text"
-            id="dayStart"
-            onChange={(e) => setStart(formatDateString(e.target.value))}
-          />
-          <label htmlFor="dayEnd"> to </label>
-          <input
-            type="date"
-            placeholder="to"
-            className="input-text"
-            id="dayEnd"
-            onChange={(e) => setEnd(formatDateString(e.target.value))}
+    <div className="border rounded-md w-full h-[350px] flex flex-col justify-between items-center px-8 py-10">
+      <div className="w-full">${props.price} / night</div>
+      <div className="flex h-1/5 w-full justify-between items-center">
+        <div>from:</div>
+        <div className="w-1/3 h-full">
+          <Input
+            border="full"
+            type="text"
+            placeholder={getDateString(dayStart)}
           />
         </div>
-        <input
-          type="number"
-          min={1}
-          placeholder="1 guest"
-          className="input-text"
-        ></input>
-        <Link to={SITE_PAGES.CONFIRM_BOOKING.path} className="center-btn">
-          <ButtonComponent label="Book Now"></ButtonComponent>
-        </Link>
+        <div>to:</div>
+        <div className="w-1/3 h-full">
+          <Input
+            border="full"
+            type="text"
+            placeholder={getDateString(dayEnd)}
+          />
+        </div>
       </div>
+      <div className="flex h-1/5 w-full items-center">
+        <div className="pr-3">guests:</div>
+        <Input border="full" type="number" placeholder="1 guest" />
+      </div>
+      <Link to={SITE_PAGES.CONFIRM_BOOKING.path} className="w-2/3 h-1/5">
+        <Button>Book now</Button>
+      </Link>
     </div>
   );
 }

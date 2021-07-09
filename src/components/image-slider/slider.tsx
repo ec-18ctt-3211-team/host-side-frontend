@@ -31,7 +31,11 @@ export default function ImageSlider(props: Props): JSX.Element {
       )}
       <div className="flex w-full relative items-center px-3">
         <div
-          className="w-10 h-10 bg-white flex items-center justify-center rounded-full absolute left-0 z-10"
+          className={[
+            'w-10 h-10 flex items-center justify-center absolute left-0 z-10',
+            'bg-white text-brown-700 rounded-full shadow-md',
+            'hover:bg-brown-600 hover:text-brown-100',
+          ].join(' ')}
           onClick={() => reloadImage('left')}
         >
           <Icon icon={leftSmallOutline} style={{ fontSize: '30px' }} />
@@ -47,7 +51,11 @@ export default function ImageSlider(props: Props): JSX.Element {
           );
         })}
         <div
-          className="w-10 h-10 bg-white flex items-center justify-center rounded-full rotate-180 absolute right-0 z-10"
+          className={[
+            'w-10 h-10 flex items-center justify-center absolute rotate-180 right-0 z-10',
+            'bg-white text-brown-700 rounded-full shadow-md',
+            'hover:bg-brown-600 hover:text-brown-100',
+          ].join(' ')}
           onClick={() => reloadImage('right')}
         >
           <Icon icon={leftSmallOutline} style={{ fontSize: '30px' }} />

@@ -46,6 +46,7 @@ export default function ImageSlider(props: Props): JSX.Element {
               data={{ src: image.src, name: image.name }}
               width={100 / props.limit}
               isLink={props.isLink}
+              key={index}
             />
           );
         })}

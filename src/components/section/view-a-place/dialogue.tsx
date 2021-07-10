@@ -2,7 +2,7 @@ import { SITE_PAGES } from 'constants/pages.const';
 import { useEffect, useState } from 'react';
 import { getDateString } from 'utils/datetime.utils';
 import { Link } from 'react-router-dom';
-import { Button, Input } from 'components/common';
+import { Button, Input, InputGuests } from 'components/common';
 
 interface Props {
   price: number;
@@ -44,7 +44,12 @@ export default function Dialogue(props: Props): JSX.Element {
       </div>
       <div className="flex h-1/5 w-full items-center">
         <div className="pr-3">guests:</div>
-        <Input border="full" type="text" placeholder="1 guest" />
+        <InputGuests
+          totalAdults={totalAdults}
+          setTotalAdults={setTotalAdults}
+          totalKids={totalKids}
+          setTotalKids={setTotalKids}
+        />
       </div>
       <Link to={SITE_PAGES.CONFIRM_BOOKING.path} className="w-2/3 h-1/5">
         <Button>Book now</Button>

@@ -8,6 +8,8 @@ import envelopeOutline from '@iconify/icons-teenyicons/envelope-outline';
 import userSolid from '@iconify/icons-teenyicons/user-solid';
 import phoneOutline from '@iconify/icons-teenyicons/phone-outline';
 import passwordOutline from '@iconify/icons-teenyicons/password-outline';
+import addSmallOutline from '@iconify/icons-teenyicons/add-small-outline';
+import minusSmallOutline from '@iconify/icons-teenyicons/minus-small-outline';
 
 export {
   Icon,
@@ -21,4 +23,6 @@ export {
   userSolid,
   phoneOutline,
   passwordOutline,
+  addSmallOutline,
+  minusSmallOutline,
 };

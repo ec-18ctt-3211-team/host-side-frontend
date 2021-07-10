@@ -2,6 +2,7 @@ import { Button } from 'components/common';
 import { ICustomerInfo, IBookingInfo } from 'interfaces/booking.interface';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { getDateString } from 'utils/datetime.utils';
+import { useState, useEffect } from 'react';
 
 interface Props {
   customer: ICustomerInfo;
@@ -10,6 +11,14 @@ interface Props {
 }
 
 export default function ReviewInfo(props: Props): JSX.Element {
+  const [price, setPrice] = useState(props.room.price);
+  useEffect(() => {
+    const start = props.bookingDetail.fromDate.getTime();
+    const end = props.bookingDetail.toDate.getTime();
+    if (end - start < 0) return;
+    setPrice(props.room.price * Math.round((end - start) / 86400000));
+  }, [props.bookingDetail, props.room]);
+
   return (
     <div className="h-[500px] w-[400px] flex flex-col items-center justify-evenly p-8 rounded-xl shadow-lg">
       <div className="font-bold text-xl uppercase">{props.room.room_name}</div>
@@ -35,7 +44,7 @@ export default function ReviewInfo(props: Props): JSX.Element {
         </div>
       </div>
       <div className="flex justify-evenly w-3/5">
-        <strong>Total:</strong> <div>${100}</div>
+        <strong>Total:</strong> <div>${price}</div>
       </div>
       <div className="flex justify-evenly w-full">
         <strong>Payment method:</strong>

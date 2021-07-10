@@ -13,12 +13,16 @@ interface Props {
   setAuthorized: (isAuthorized: boolean) => void;
 }
 
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+
 export default function ConfirmBooking(props: Props): JSX.Element {
   const [bookingDetail, setBookingDetail] = useState<IBookingInfo>({
     totalAdults: 0,
     totalKids: 0,
-    fromDate: new Date(),
-    toDate: new Date(),
+    fromDate: today,
+    toDate: tomorrow,
   });
   const [customerInfo, setCustomerInfo] = useState<ICustomerInfo>({
     customer_name: 'nhily',
@@ -34,17 +38,13 @@ export default function ConfirmBooking(props: Props): JSX.Element {
     >
       <div className="flex justify-between w-full">
         {/* edit data */}
-        <div className="w-1/3 flex flex-col">
+        <div className="lg:w-1/3 flex flex-col">
           <BookingInfo
-            totalAdults={2}
-            fromDate={new Date()}
-            toDate={new Date()}
             bookingDetail={bookingDetail}
             setBookingDetail={setBookingDetail}
           />
           <div className="mt-auto pt-12">
             <CustomerInfo
-              customer_name="nhily"
               customerInfo={customerInfo}
               setCustomerInfo={setCustomerInfo}
             />

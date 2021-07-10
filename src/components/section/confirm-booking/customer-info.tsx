@@ -1,16 +1,24 @@
-import { DivPx, Input } from 'components/common';
+import { useState, useEffect } from 'react';
+import { DivPx, Input, SelectOption } from 'components/common';
 import { ICustomerInfo } from 'interfaces/booking.interface';
 
 interface Props {
-  customer_name?: string;
-  phone_number?: string;
-  email?: string;
-  payment_method?: string;
   customerInfo: ICustomerInfo;
   setCustomerInfo: (detail: ICustomerInfo) => void;
 }
 
 export default function CustomerInfo(props: Props): JSX.Element {
+  const [currentOption, setCurrentOption] = useState(
+    props.customerInfo.payment_method,
+  );
+
+  useEffect(() => {
+    props.setCustomerInfo({
+      ...props.customerInfo,
+      payment_method: currentOption,
+    });
+  }, [currentOption]);
+
   return (
     <div className="font-medium uppercase">
       <div className="py-4 font-bold text-lg">Customer information</div>
@@ -18,7 +26,7 @@ export default function CustomerInfo(props: Props): JSX.Element {
         <Input
           border="line"
           type="text"
-          value={props.customer_name}
+          value={props.customerInfo.customer_name}
           label={{ value: 'customer name', position: 'top' }}
           onChange={(e) =>
             props.setCustomerInfo({
@@ -32,7 +40,7 @@ export default function CustomerInfo(props: Props): JSX.Element {
           <Input
             border="line"
             type="text"
-            value={props.phone_number}
+            value={props.customerInfo.phone_number}
             label={{ value: 'phone number', position: 'top' }}
             onChange={(e) =>
               props.setCustomerInfo({
@@ -46,7 +54,7 @@ export default function CustomerInfo(props: Props): JSX.Element {
         <Input
           border="line"
           type="text"
-          value={props.email}
+          value={props.customerInfo.email}
           label={{ value: 'email', position: 'top' }}
           onChange={(e) =>
             props.setCustomerInfo({
@@ -56,17 +64,11 @@ export default function CustomerInfo(props: Props): JSX.Element {
           }
         />
         <DivPx size={28} />
-        <Input
-          border="line"
-          type="text"
-          value={props.payment_method}
-          label={{ value: 'payment method', position: 'top' }}
-          onChange={(e) =>
-            props.setCustomerInfo({
-              ...props.customerInfo,
-              payment_method: e.target.value,
-            })
-          }
+        <SelectOption
+          label="payment method"
+          options={['paypal', 'momo', 'cash']}
+          currentOptions={currentOption}
+          setCurrentOptions={setCurrentOption}
         />
       </div>
     </div>

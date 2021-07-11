@@ -1,7 +1,7 @@
-import { SignupLogin } from 'components/common/signup-login/signup-login';
+import { Form } from 'components/common/form/Form';
 
 export default function UserSignUp(): JSX.Element {
   return(
-    <SignupLogin isSignUp={ true }></SignupLogin>
+    <Form type='SignUp' title='SIGN UP'></Form>
   );
 }

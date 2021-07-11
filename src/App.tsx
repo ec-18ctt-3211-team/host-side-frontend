@@ -55,13 +55,7 @@ function App() {
         </Route> 
         <Route path={SITE_PAGES.LOG_IN.path}>
           <Pages.UserLogIn/>
-        </Route>  
-        <Route path={SITE_PAGES.SUCCESS_BOOKING.path}>
-          <Pages.SuccessBooking
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
-        </Route>  
+        </Route>   
         <Route path="*">
           <div>ERROR!!!</div>
         </Route>

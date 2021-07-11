@@ -8,45 +8,46 @@ import {
   passwordOutline,
 } from 'utils/icon.utils';
 
-import './signup-login.css';
+import './Form.css';
 
 interface IBoolean{
-  isSignUp: boolean;
+  type: 'SignUp'| 'LogIn';
+  title?: string;
 }
 
-export const SignupLogin: React.FC<IBoolean> = (props: IBoolean) =>{
-  const isSignUp = props.isSignUp;
+export const Form: React.FC<IBoolean> = (props: IBoolean) =>{
+  const { type, title }= props;
   return(
     <div className='flex justify-center'>
       <div className='login-component'>
-        {isSignUp && <h1 className = 'text-4xl font-bold py-4'>Sign Up</h1>}
-        {!isSignUp && <h1 className = 'text-4xl font-bold py-4'>Log In</h1>}
+        {type === 'SignUp' && <h1 className = 'text-4xl font-bold py-4'>{title}</h1>}
+        {type === 'LogIn' && <h1 className = 'text-4xl font-bold py-4'>{title}</h1>}
         <div className= 'py-2 h-full'>
           <Input 
             border='full' 
-            type ='password' 
+            type ='text' 
             placeholder = 'email'
-            classname = 'py-2 h-full'
+            classname = 'py-2'
             icon={{ icon: <Icon icon={envelopeOutline} />, position: 'right' }}/>
         </div>
 
-        {isSignUp && 
+        {type === 'SignUp' && 
           <div className='py-2 h-full'>
             <Input 
               border='full' 
-              type ='password' 
+              type ='text' 
               placeholder= 'full name'
-              classname = 'py-2 h-full'
+              classname = 'py-2'
               icon={{ icon: <Icon icon={userSolid} />, position: 'right' }}/> 
           </div>}
        
-        {isSignUp && 
+        {type === 'SignUp' && 
           <div className='py-2 h-full'> 
             <Input 
               border='full' 
-              type ='password' 
+              type ='text' 
               placeholder = 'phone number'
-              classname = 'py-2 h-full' 
+              classname = 'py-2' 
               icon={{ icon: <Icon icon={phoneOutline} />, position: 'right' }}/> 
           </div>}     
 
@@ -55,26 +56,26 @@ export const SignupLogin: React.FC<IBoolean> = (props: IBoolean) =>{
             border='full' 
             type ='password' 
             placeholder = 'password' 
-            classname = 'py-2 h-full'
+            classname = 'py-2'
             icon={{ icon: <Icon icon={passwordOutline} />, position: 'right' }}></Input>
         </div>
         
-        {isSignUp && 
+        {type === 'SignUp' && 
           <div className='py-2 h-full'>  
             <Input 
               border='full' 
               type ='password' 
               placeholder = 'confirm password' 
-              classname = 'py-2 h-full'
+              classname = 'py-2'
               icon={{ icon: <Icon icon={passwordOutline} />, position: 'right' }}/>
           </div>}
         
         <div className='w-full flex justify-center py-4'>
-          {isSignUp && <Button children ='Sign Up' className="py-2 w-2/3 h-full"></Button>}
-          {!isSignUp && <Button children ='Log In' className="py-2 w-2/3 h-full"></Button>}
+          {type === 'SignUp' && <Button children ='Sign Up' className="py-2 w-2/3 h-full"></Button>}
+          {type === 'LogIn'  && <Button children ='Log In' className="py-2 w-2/3 h-full"></Button>}
         </div>
-        {!isSignUp && <p className ='italic my-4'>or</p>}
-        {!isSignUp && <p id='p-link'>create a new account</p>}
+        {type === 'LogIn'  && <p className ='italic my-4'>or</p>}
+        {type === 'LogIn'  && <p className='italic' id='p-link'>create a new account</p>}
       </div>
     </div>
   );

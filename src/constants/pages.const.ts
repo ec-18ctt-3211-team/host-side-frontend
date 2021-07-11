@@ -33,7 +33,4 @@ export const SITE_PAGES = {
   LOG_IN:{
     path: '/log_in'
   },
-  SUCCESS_BOOKING:{
-    path: '/success'
-  },
 };

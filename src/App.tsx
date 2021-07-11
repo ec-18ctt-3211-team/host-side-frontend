@@ -50,12 +50,6 @@ function App() {
             setAuthorized={setAuthorized}
           />
         </Route>
-        <Route path={SITE_PAGES.SIGN_UP.path}>
-          <Pages.UserSignUp/>
-        </Route> 
-        <Route path={SITE_PAGES.LOG_IN.path}>
-          <Pages.UserLogIn/>
-        </Route>   
         <Route path="*">
           <div>ERROR!!!</div>
         </Route>

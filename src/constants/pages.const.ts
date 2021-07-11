@@ -27,10 +27,4 @@ export const SITE_PAGES = {
     label: 'user profile',
     path: '/user_profile',
   },
-  SIGN_UP:{
-    path: '/sign_up'
-  },
-  LOG_IN:{
-    path: '/log_in'
-  },
 };

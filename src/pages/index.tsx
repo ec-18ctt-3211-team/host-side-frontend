@@ -5,8 +5,6 @@ import ListOfRooms from 'pages/list-of-rooms';
 import Main from 'pages/main';
 import BookingHistory from 'pages/booking-history';
 import UserProfile from './user-profile';
-import UserSignUp from './user-signup';
-import UserLogIn from './user-login';
 
 
 const Pages = {
@@ -17,8 +15,6 @@ const Pages = {
   Main,
   BookingHistory,
   UserProfile,
-  UserSignUp,
-  UserLogIn,
 };
 
 export default Pages;

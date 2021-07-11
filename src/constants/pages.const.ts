@@ -27,4 +27,8 @@ export const SITE_PAGES = {
     label: 'user profile',
     path: '/user_profile',
   },
+  SUCCESS_BOOKING:{
+    label: 'success booking',
+    path: '/success_booking'
+  },
 };

@@ -6,7 +6,7 @@ Frontend repository
 
 Authors: Ly Ngoc Nhi, Truong Cong Anh
 
-Deploy: https://serene-nobel-5a771d.netlify.app/
+Deploy: 
 
 A homestay booking website
 

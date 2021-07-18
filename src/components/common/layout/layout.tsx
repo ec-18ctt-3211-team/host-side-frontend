@@ -18,9 +18,9 @@ export default function Layout(props: Props): JSX.Element {
         setAuthorized={props.setAuthorized}
         allowSearch={props.allowSearch}
       />
-      <div className="flex h-full">
+      <div className="flex h-full w-full">
         <Sidebar />
-        <div className="p-8 w-[calc(100% - 232px)]">{props.children}</div>
+        <div className="p-4 w-[calc(100%-232px)] h-full">{props.children}</div>
       </div>
       <Footer />
     </div>

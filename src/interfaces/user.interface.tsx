@@ -4,7 +4,7 @@ export interface IUserInfo {
   phone_number: string;
   email: string;
   citizen_id: string;
-  new_password: string;
+  new_password?: string;
 }
 
 export interface IStatus {

@@ -22,7 +22,7 @@ export default function Form(props: Props): JSX.Element {
   const [isMatched, setMatched] = useState<boolean>(true);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg h-full w-full flex flex-col justify-between items-center p-6 select-none">
+    <div className="bg-white rounded-xl h-full w-full flex flex-col justify-between items-center p-6 select-none">
       <div className="uppercase font-bold text-brown text-xl">
         {props.title}
       </div>

@@ -8,6 +8,7 @@ import Searchbar from './searchbar';
 import DivPx from './divpx';
 import { Pagination, PaginationItem } from './pagination';
 import SelectOption from './options';
+import Form from './form';
 
 export type borderType = 'full' | 'line';
 export type inputType = 'text' | 'password';
@@ -25,4 +26,5 @@ export {
   Pagination,
   PaginationItem,
   SelectOption,
+  Form,
 };

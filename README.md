@@ -3,8 +3,9 @@
 **3211 TEAM**
 
 Frontend repository
+Host side
 
-Authors: Ly Ngoc Nhi, Truong Cong Anh
+Authors: Ly Ngoc Nhi
 
 Deploy: https://affectionate-ardinghelli-ee16e6.netlify.app
 

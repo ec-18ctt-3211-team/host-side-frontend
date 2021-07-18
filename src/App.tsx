@@ -9,8 +9,26 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path={SITE_PAGES.HOST_INFORMATION.path}>
+        <Route exact path="/">
           <Pages.HostInformation
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route path={SITE_PAGES.HOST_INFORMATION.path}>
+          <Pages.HostInformation
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route exact path={SITE_PAGES.MANAGE_ROOMS.path}>
+          <Pages.ListOfRooms
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route exact path={SITE_PAGES.VIEW_A_ROOM.path}>
+          <Pages.ViewARoom
             isAuthorized={isAuthorized}
             setAuthorized={setAuthorized}
           />

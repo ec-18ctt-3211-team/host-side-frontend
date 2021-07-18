@@ -1,35 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_PAGES } from 'constants/pages.const';
 import { IImageTag } from 'interfaces/image-tag.interface';
 
 interface Props {
   data: IImageTag;
   width: number;
-  isLink?: boolean;
 }
 
 const Wrapper = (props: {
   children: React.ReactNode;
   width: number;
-  isLink?: boolean;
 }): JSX.Element => {
   return (
     <div className="px-2 relative" style={{ width: `${props.width}%` }}>
-      {/* {props.isLink ? (
-        <Link className="cursor-pointer" to={SITE_PAGES.LIST_OF_ROOMS.path}>
-          {props.children}
-        </Link>
-      ) : (
-        <div>{props.children}</div>
-      )} */}
+      {props.children}
     </div>
   );
 };
 
 export default function ImageTag(props: Props): JSX.Element {
   return (
-    <Wrapper width={props.width} isLink={props.isLink}>
+    <Wrapper width={props.width}>
       <img
         src={props.data.src}
         className={[

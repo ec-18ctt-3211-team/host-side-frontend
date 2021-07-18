@@ -12,3 +12,11 @@ export interface IBookingInfo {
   fromDate: Date;
   toDate: Date;
 }
+
+export interface IOrderInfo {
+  orderID: string;
+  customerInfo: ICustomerInfo;
+  bookingInfo: IBookingInfo;
+  roomID: string;
+  action: string;
+}

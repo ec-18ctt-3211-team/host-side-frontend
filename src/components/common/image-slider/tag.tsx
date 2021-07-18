@@ -16,13 +16,13 @@ const Wrapper = (props: {
 }): JSX.Element => {
   return (
     <div className="px-2 relative" style={{ width: `${props.width}%` }}>
-      {props.isLink ? (
+      {/* {props.isLink ? (
         <Link className="cursor-pointer" to={SITE_PAGES.LIST_OF_ROOMS.path}>
           {props.children}
         </Link>
       ) : (
         <div>{props.children}</div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import Footer from './footer';
+import Sidebar from './sidebar';
 
 type Props = {
   isAuthorized: boolean;
@@ -11,13 +12,16 @@ type Props = {
 
 export default function Layout(props: Props): JSX.Element {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="h-screen flex flex-col bg-gray-200">
       <Navbar
         isAuthorized={props.isAuthorized}
         setAuthorized={props.setAuthorized}
         allowSearch={props.allowSearch}
       />
-      <div className="p-8">{props.children}</div>
+      <div className="flex h-full">
+        <Sidebar />
+        <div className="p-8 w-[calc(100% - 232px)]">{props.children}</div>
+      </div>
       <Footer />
     </div>
   );

@@ -7,7 +7,6 @@ interface Props {
   title?: string;
   limit: number;
   images: IImageTag[];
-  isLink?: boolean;
 }
 
 export default function ImageSlider(props: Props): JSX.Element {
@@ -45,7 +44,6 @@ export default function ImageSlider(props: Props): JSX.Element {
             <ImageTag
               data={{ src: image.src, name: image.name }}
               width={100 / props.limit}
-              isLink={props.isLink}
               key={index}
             />
           );

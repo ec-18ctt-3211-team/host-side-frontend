@@ -6,7 +6,7 @@ Frontend repository
 
 Authors: Ly Ngoc Nhi, Truong Cong Anh
 
-Deploy: 
+Deploy: https://affectionate-ardinghelli-ee16e6.netlify.app
 
 A homestay booking website
 

@@ -27,8 +27,20 @@ function App() {
             setAuthorized={setAuthorized}
           />
         </Route>
-        <Route exact path={SITE_PAGES.VIEW_A_ROOM.path}>
+        <Route path={SITE_PAGES.VIEW_A_ROOM.path}>
           <Pages.ViewARoom
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route exact path={SITE_PAGES.BOOKING_REQUEST.path}>
+          <Pages.ListOfRequest
+            isAuthorized={isAuthorized}
+            setAuthorized={setAuthorized}
+          />
+        </Route>
+        <Route path={SITE_PAGES.VIEW_AN_ORDER.path}>
+          <Pages.ViewAnOrder
             isAuthorized={isAuthorized}
             setAuthorized={setAuthorized}
           />

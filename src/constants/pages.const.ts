@@ -8,11 +8,15 @@ export const SITE_PAGES = {
     path: '/manage-rooms',
   },
   VIEW_A_ROOM: {
-    label: 'Manage rooms',
+    label: 'View a room',
     path: '/manage-rooms/:id',
   },
   BOOKING_REQUEST: {
     label: 'Booking request',
     path: '/booking-request',
+  },
+  VIEW_AN_ORDER: {
+    label: 'View an order',
+    path: '/booking-request/:id',
   },
 };

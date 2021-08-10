@@ -2,13 +2,8 @@ import { Layout, Form } from 'components/common';
 import { IUserInfo } from 'interfaces/user.interface';
 import { useState } from 'react';
 
-interface Props {
-  isAuthorized: boolean;
-  setAuthorized: (isAuthorized: boolean) => void;
-}
-
-export default function HostInfomation(props: Props): JSX.Element {
-  const [data, setData] = useState<IUserInfo>({
+export default function HostInfomation(): JSX.Element {
+  const [userInfo, setUserInfo] = useState<IUserInfo>({
     userID: '12345',
     username: 'Ly Ngoc Nhi',
     phone_number: '0123456789',
@@ -21,17 +16,14 @@ export default function HostInfomation(props: Props): JSX.Element {
   }
 
   return (
-    <Layout
-      isAuthorized={props.isAuthorized}
-      setAuthorized={props.setAuthorized}
-    >
-      <div className="h-full w-full bg-white flex justify-center items-center rounded-lg">
-        <div className="py-1 h-full">
+    <Layout>
+      <div className="h-full w-full bg-white flex items-center justify-center rounded-lg">
+        <div className="h-full py-6 w-2/5">
           <Form
-            title={data.username}
-            userInfo={data}
-            setUserInfo={setData}
-            button={{ label: 'update', onClick: updateProfile }}
+            title="Host profile"
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            button={{ label: 'Update', onClick: updateProfile }}
           />
         </div>
       </div>

@@ -1,49 +1,28 @@
-import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
 import { Pages } from 'pages';
 
 function App() {
-  const [isAuthorized, setAuthorized] = useState(true);
-
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Pages.HostInformation
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.ListOfRooms />
         </Route>
         <Route path={SITE_PAGES.HOST_INFORMATION.path}>
-          <Pages.HostInformation
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.HostInformation />
         </Route>
         <Route exact path={SITE_PAGES.MANAGE_ROOMS.path}>
-          <Pages.ListOfRooms
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.ListOfRooms />
         </Route>
         <Route path={SITE_PAGES.VIEW_A_ROOM.path}>
-          <Pages.ViewARoom
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.ViewARoom />
         </Route>
         <Route exact path={SITE_PAGES.BOOKING_REQUEST.path}>
-          <Pages.ListOfRequest
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.ListOfRequest />
         </Route>
         <Route path={SITE_PAGES.VIEW_AN_ORDER.path}>
-          <Pages.ViewAnOrder
-            isAuthorized={isAuthorized}
-            setAuthorized={setAuthorized}
-          />
+          <Pages.ViewAnOrder />
         </Route>
         <Route path="*">
           <div>ERROR!!!</div>

@@ -3,6 +3,7 @@ import ImageSlider from './image-slider/slider';
 import ImageTag from './image-slider/tag';
 import Input from './input/input';
 import InputGuests from './input/input-guests';
+import InputNumber from './input/input-number';
 import Layout from './layout/layout';
 import Searchbar from './searchbar';
 import DivPx from './divpx';
@@ -15,7 +16,7 @@ import Loading from './loading';
 export type borderType = 'full' | 'line';
 export type inputType = 'text' | 'password';
 export type positionType = 'left' | 'right' | 'top' | 'bottom';
-export type formType = 'login' | 'signup' | 'profile';
+// export type formType = 'login' | 'signup' | 'profile';
 
 export {
   Button,
@@ -23,6 +24,7 @@ export {
   ImageTag,
   Input,
   InputGuests,
+  InputNumber,
   Layout,
   Searchbar,
   DivPx,

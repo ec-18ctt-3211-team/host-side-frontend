@@ -1,13 +1,7 @@
 import { Layout } from 'components/common';
-import { IOrderInfo } from 'interfaces/booking.interface';
 import { getDateString } from 'utils/datetime.utils';
 
-interface Props {
-  isAuthorized: boolean;
-  setAuthorized: (isAuthorized: boolean) => void;
-}
-
-const ORDER: IOrderInfo = {
+const ORDER = {
   orderID: '',
   customerInfo: {
     customerID: '1234567',
@@ -26,12 +20,9 @@ const ORDER: IOrderInfo = {
   action: 'waiting',
 };
 
-export default function ViewAnOrder(props: Props): JSX.Element {
+export default function ViewAnOrder(): JSX.Element {
   return (
-    <Layout
-      isAuthorized={props.isAuthorized}
-      setAuthorized={props.setAuthorized}
-    >
+    <Layout>
       <div className="h-full w-full p-8 bg-white flex rounded-lg">
         <div className="w-1/2 px-12">
           <div className="uppercase font-bold text-xl">

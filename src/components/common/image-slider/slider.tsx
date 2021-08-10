@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { ImageTag } from 'components/common';
-import { IImageTag } from 'interfaces/image-tag.interface';
+import { IImage } from 'interfaces/image.interface';
 import { Icon, leftSmallOutline } from 'utils/icon.utils';
 
 interface Props {
   title?: string;
   limit: number;
-  images: IImageTag[];
+  images: IImage[];
+  isLink?: boolean;
 }
 
 export default function ImageSlider(props: Props): JSX.Element {
@@ -41,11 +42,7 @@ export default function ImageSlider(props: Props): JSX.Element {
         {props.images.map((image, index) => {
           if (index < slider.start || index >= slider.end) return;
           return (
-            <ImageTag
-              data={{ src: image.src, name: image.name }}
-              width={100 / props.limit}
-              key={index}
-            />
+            <ImageTag data={image} width={100 / props.limit} key={index} />
           );
         })}
         <div

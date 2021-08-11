@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
-import { IUserInfo } from 'interfaces/user.interface';
 
 const Menu = (props: {
   data: { label: string; path: string };

@@ -14,9 +14,11 @@ export default function ListOfRequest(): JSX.Element {
   const [maxPage, setMaxPage] = useState<number>(1);
   const [loading, setLoading] = useState(false);
 
-  async function fetchOrders() {
+  async function fetchOrders(host_id: string) {
     try {
-      const response = await fetcher.GET(ENDPOINT_URL.GET.getAllOrders);
+      const response = await fetcher.GET(
+        ENDPOINT_URL.GET.getAllOrders(host_id),
+      );
       setOrders(response.data.orders);
       setMaxPage(Math.ceil(response.data.orders.length / items_per_pages));
     } catch (error) {
@@ -25,8 +27,9 @@ export default function ListOfRequest(): JSX.Element {
   }
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    const host_id = localStorage.getItem('userID');
+    if (host_id) fetchOrders(host_id);
+  }, [localStorage]);
 
   async function updateOrder(status: string, orderID: string, index: number) {
     if (!orders) return;

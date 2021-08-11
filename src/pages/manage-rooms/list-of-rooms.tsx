@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Layout, Loading, Pagination } from 'components/common';
 import { RoomCard } from 'components/section/manage-rooms';
-import { SITE_PAGES } from 'constants/pages.const';
 import * as fetcher from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const LIMIT = 10;
 
 export default function ListOfRooms(): JSX.Element {
+  const location = useLocation();
   const [currentPage, setCurrentPage] = useState(0);
   const [rooms, setRooms] = useState<IRoomDetail[]>();
   const [maxPages, setMaxPages] = useState<number>(1);
 
-  async function fetchRooms() {
+  async function fetchRooms(host_id: string) {
     try {
       const response = await fetcher.GET(
-        ENDPOINT_URL.GET.getAllRooms +
+        ENDPOINT_URL.GET.getAllRooms(host_id) +
           `?limit=${LIMIT}&page=${currentPage + 1}`,
       );
       setRooms(response.data.rooms);
@@ -28,8 +28,13 @@ export default function ListOfRooms(): JSX.Element {
   }
 
   useEffect(() => {
-    fetchRooms();
-  }, [currentPage]);
+    const host_id = localStorage.getItem('userID');
+    if (host_id === null) {
+      const path = location.pathname.split('/');
+      localStorage.setItem('userID', path[1]);
+      fetchRooms(path[1]);
+    } else fetchRooms(host_id);
+  }, [currentPage, localStorage]);
 
   return (
     <Layout>

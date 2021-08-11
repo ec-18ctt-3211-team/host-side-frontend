@@ -8,7 +8,7 @@ Host side
 
 Authors: Ly Ngoc Nhi, Truong Cong Anh
 
-Deploy: https://affectionate-ardinghelli-ee16e6.netlify.app
+Deploy: https://3211-host.netlify.app
 
 A homestay booking website
 

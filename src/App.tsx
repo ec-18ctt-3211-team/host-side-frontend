@@ -9,6 +9,9 @@ function App() {
         <Route exact path="/">
           <Pages.ListOfRooms />
         </Route>
+        <Route exact path="/:id">
+          <Pages.ListOfRooms />
+        </Route>
         <Route path={SITE_PAGES.HOST_INFORMATION.path}>
           <Pages.HostInformation />
         </Route>

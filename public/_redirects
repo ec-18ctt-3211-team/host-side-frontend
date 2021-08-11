@@ -1,4 +1,3 @@
 /* /index.html 200
-/ /manage-rooms/:id
 /manage-rooms /manage-rooms/:id
 /booking-request /booking-request/:id

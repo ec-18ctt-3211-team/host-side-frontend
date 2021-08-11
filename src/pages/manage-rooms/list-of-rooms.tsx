@@ -31,8 +31,12 @@ export default function ListOfRooms(): JSX.Element {
     const host_id = localStorage.getItem('userID');
     if (host_id === null) {
       const path = location.pathname.split('/');
-      localStorage.setItem('userID', path[1]);
-      fetchRooms(path[1]);
+      if (path[1]) {
+        localStorage.setItem('userID', path[1]);
+        fetchRooms(path[1]);
+      } else {
+        console.log(path);
+      }
     } else fetchRooms(host_id);
   }, [currentPage, localStorage]);
 

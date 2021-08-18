@@ -8,7 +8,7 @@ Host side
 
 Authors: Ly Ngoc Nhi, Truong Cong Anh
 
-Deploy: https://3211-h.netlify.app
+Deploy: https://3211-host.netlify.app
 
 A homestay booking website
 

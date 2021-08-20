@@ -24,10 +24,11 @@ export default function HostLogin(){
       const response = await POST(ENDPOINT_URL.POST.login, payload);
       if (response.data.valid) {
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userID', response.data.userID);
+        localStorage.setItem('userID', response.data.userId);
+        
         setUserInfo({
           ...userInfo,
-          userID: response.data.userID,
+          userID: response.data.userId,
           username: response.data.name,
           ava: BASE + response.data.ava,
         });
@@ -39,9 +40,9 @@ export default function HostLogin(){
     }
   }
   function checkAuthorized(){
-    console.log('Check Author');
     const token = localStorage.getItem('token');
-    if (token) {
+    const userID = localStorage.getItem('userID');
+    if (token && userID!= null) {
       history.push({
         pathname: SITE_PAGES.MANAGE_ROOMS.path,
         search: '',  

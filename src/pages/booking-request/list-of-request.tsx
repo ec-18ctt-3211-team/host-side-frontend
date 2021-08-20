@@ -16,7 +16,10 @@ export default function ListOfRequest(): JSX.Element {
 
   async function fetchOrders() {
     try {
-      const response = await fetcher.GET(ENDPOINT_URL.GET.getAllOrders);
+      const host_id = localStorage.getItem('userID');
+      if(host_id === null) return;
+      
+      const response = await fetcher.GET(ENDPOINT_URL.GET.getAllOrders(host_id));
       setOrders(response.data.orders);
       setMaxPage(Math.ceil(response.data.orders.length / items_per_pages));
     } catch (error) {

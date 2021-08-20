@@ -16,8 +16,11 @@ export default function ListOfRooms(): JSX.Element {
 
   async function fetchRooms() {
     try {
+      const host_id = localStorage.getItem('userID');
+      if(host_id === null) return;
+      
       const response = await fetcher.GET(
-        ENDPOINT_URL.GET.getAllRooms +
+        ENDPOINT_URL.GET.getAllRooms(host_id) +
           `?limit=${LIMIT}&page=${currentPage + 1}`,
       );
       setRooms(response.data.rooms);

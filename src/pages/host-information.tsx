@@ -20,6 +20,7 @@ export default function HostInfomation(): JSX.Element {
       <div className="h-full w-full bg-white flex items-center justify-center rounded-lg">
         <div className="h-full py-6 w-2/5">
           <Form
+            type = 'Info'
             title="Host profile"
             userInfo={userInfo}
             setUserInfo={setUserInfo}

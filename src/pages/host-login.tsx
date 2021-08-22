@@ -15,9 +15,12 @@ const defaultUser: IUserInfo = {
 };
 
 export default function HostLogin() {
+  const history = useHistory();
   const [userInfo, setUserInfo] = useState<IUserInfo>(defaultUser);
   const [loading, setLoading] = useState<boolean>(false);
-  const history = useHistory();
+  const [message, setMessage] = useState(
+    'Please login again with your user account',
+  );
 
   async function login() {
     try {
@@ -40,7 +43,7 @@ export default function HostLogin() {
         localStorage.setItem('userImg', BASE + response.data.ava);
       }
     } catch (error: any) {
-      window.alert(error.response.data.message);
+      setMessage(error.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -69,8 +72,8 @@ export default function HostLogin() {
             setUserInfo={setUserInfo}
             button={{ label: 'Log In', onClick: login }}
           />
-          <div className="w-2/3 whitespace-pre-wrap text-sm italic text-gray-600">
-            Please login again with your user account
+          <div className="whitespace-pre-wrap px-4 text-sm italic text-gray-600">
+            {message}
           </div>
         </div>
       ) : (

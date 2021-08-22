@@ -10,15 +10,18 @@ import { SITE_PAGES } from 'constants/pages.const';
 const LIMIT = 10;
 
 export default function ListOfRooms(): JSX.Element {
+  const history = useHistory();
   const [currentPage, setCurrentPage] = useState(0);
   const [rooms, setRooms] = useState<IRoomDetail[]>();
   const [maxPages, setMaxPages] = useState<number>(1);
-  const history = useHistory();
 
   async function fetchRooms() {
     try {
       const host_id = localStorage.getItem('userID');
-      if (host_id === null) return;
+      if (host_id === null) {
+        history.push('/');
+        return;
+      }
       const response = await fetcher.GET(
         ENDPOINT_URL.GET.getAllRooms(host_id, LIMIT, currentPage + 1) +
           `?limit=${LIMIT}&page=${currentPage + 1}`,

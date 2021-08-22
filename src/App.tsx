@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Pages.ListOfRooms />
+          <Pages.HostLogin />
         </Route>
         <Route path={SITE_PAGES.HOST_INFORMATION.path}>
           <Pages.HostInformation />

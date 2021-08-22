@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'rosario';
   src: url('./font/rosario.regular.otf') format('otf');
@@ -26,10 +30,6 @@
   font-style: italic;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 *,
 *::before,
 *::after {
@@ -40,7 +40,7 @@
 :root,
 input,
 button {
-  @apply font-custom;
+  font-family: 'rosario';
   letter-spacing: 2px;
   line-height: 1;
   font-size: 18px;

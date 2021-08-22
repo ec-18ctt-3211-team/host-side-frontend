@@ -15,6 +15,20 @@ import { GET } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
 
+const defaultRoom: IRoomDetail = {
+  _id: '',
+  host_id: localStorage.getItem('userID') ?? '',
+  title: '',
+  thumnail: '',
+  max_guest: 0,
+  address: { number: '', street: '', ward: '', district: '', city: '' },
+  description: '',
+  normal_price: 0,
+  weekend_price: 0,
+  created_at: '',
+  deleted_at: null,
+};
+
 export default function ViewARoom(): JSX.Element {
   const location = useLocation();
   const [roomDetails, setRoomDetails] = useState<IRoomDetail>();
@@ -22,8 +36,17 @@ export default function ViewARoom(): JSX.Element {
   async function fetchRoom() {
     const path = location.pathname.split('/');
     const roomID = path[path.length - 1];
-    const response = await GET(ENDPOINT_URL.GET.getRoomsByID(roomID));
-    setRoomDetails(response.data.room);
+
+    if (roomID !== 'create') {
+      try {
+        const response = await GET(ENDPOINT_URL.GET.getRoomsByID(roomID));
+        if (response.data.valid) setRoomDetails(response.data.room);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setRoomDetails(defaultRoom);
+    }
   }
 
   useEffect(() => {

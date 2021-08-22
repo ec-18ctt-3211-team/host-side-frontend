@@ -1,6 +1,6 @@
 import { Layout, Pagination, DivPx, Loading } from 'components/common';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
 import { IOrder, OrderStatusLabels } from 'interfaces/order.interface';
 import * as fetcher from 'utils/fetcher.utils';
@@ -9,6 +9,7 @@ import { ENDPOINT_URL } from 'constants/api.const';
 const items_per_pages = 8;
 
 export default function ListOfRequest(): JSX.Element {
+  const history = useHistory();
   const [orders, setOrders] = useState<IOrder[]>();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [maxPage, setMaxPage] = useState<number>(1);
@@ -16,9 +17,21 @@ export default function ListOfRequest(): JSX.Element {
 
   async function fetchOrders() {
     try {
-      const response = await fetcher.GET(ENDPOINT_URL.GET.getAllOrders);
+      const host_id = localStorage.getItem('userID');
+      if (host_id === null) {
+        history.push('/');
+        return;
+      }
+
+      const response = await fetcher.GET(
+        ENDPOINT_URL.GET.getAllOrders(
+          host_id,
+          items_per_pages,
+          currentPage + 1,
+        ),
+      );
       setOrders(response.data.orders);
-      setMaxPage(Math.ceil(response.data.orders.length / items_per_pages));
+      setMaxPage(Math.max(Math.ceil(response.data.total / items_per_pages), 1));
     } catch (error) {
       console.log(error);
     }

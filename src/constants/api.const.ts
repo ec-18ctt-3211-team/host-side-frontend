@@ -1,9 +1,9 @@
-const host_id = localStorage.getItem('userID');
-
 export const ENDPOINT_URL = {
   GET: {
-    getAllOrders: `/order/${host_id}`,
-    getAllRooms: `/customer/${host_id}/rooms`,
+    getAllOrders: (host_id: string, limit: number, page: number) =>
+      `/order/host/${host_id}?limit=${limit}&page=${page}`,
+    getAllRooms: (host_id: string, limit: number, page: number) =>
+      `/rooms/host/${host_id}?limit=${limit}&page=${page}`,
     getRoomsByID: (id: string) => `/rooms/${id}`,
   },
   POST: {

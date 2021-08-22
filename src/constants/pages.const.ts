@@ -9,7 +9,7 @@ export const SITE_PAGES = {
   },
   VIEW_A_ROOM: {
     label: 'View a room',
-    path: '/manage-rooms/:id',
+    path: '/manage-rooms',
   },
   BOOKING_REQUEST: {
     label: 'Booking request',
@@ -17,6 +17,6 @@ export const SITE_PAGES = {
   },
   VIEW_AN_ORDER: {
     label: 'View an order',
-    path: '/booking-request/:id',
+    path: '/booking-request',
   },
 };

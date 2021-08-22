@@ -17,11 +17,17 @@ export default function ListOfRequest(): JSX.Element {
   async function fetchOrders() {
     try {
       const host_id = localStorage.getItem('userID');
-      if(host_id === null) return;
-      
-      const response = await fetcher.GET(ENDPOINT_URL.GET.getAllOrders(host_id));
+      if (host_id === null) return;
+
+      const response = await fetcher.GET(
+        ENDPOINT_URL.GET.getAllOrders(
+          host_id,
+          items_per_pages,
+          currentPage + 1,
+        ),
+      );
       setOrders(response.data.orders);
-      setMaxPage(Math.ceil(response.data.orders.length / items_per_pages));
+      setMaxPage(Math.max(Math.ceil(response.data.total / items_per_pages), 1));
     } catch (error) {
       console.log(error);
     }

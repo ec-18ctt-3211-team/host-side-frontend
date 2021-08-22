@@ -37,8 +37,8 @@ export interface IRoomDetail {
   extraPrices?: ISpecialPrice[];
   bookingDates?: IBookingDate[];
   created_at: string;
-  deleted_at: null;
-  __v: number;
+  deleted_at: string | null;
+  __v?: number;
 }
 
 export interface IResponse {

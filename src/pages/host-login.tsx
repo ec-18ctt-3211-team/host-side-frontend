@@ -1,71 +1,81 @@
-import { Form }  from 'components/common/';
+import { Form, Loading } from 'components/common/';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { SITE_PAGES } from 'constants/pages.const';
 import { IUserInfo } from 'interfaces/user.interface';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BASE, POST } from 'utils/fetcher.utils';
 
-export default function HostLogin(){
-  const [userInfo, setUserInfo] = useState<IUserInfo>({ userID: '', username: '', phone_number: '', email: '', password: '' });
+const defaultUser: IUserInfo = {
+  userID: '',
+  username: '',
+  phone_number: '',
+  email: '',
+  password: '',
+};
+
+export default function HostLogin() {
+  const [userInfo, setUserInfo] = useState<IUserInfo>(defaultUser);
+  const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
 
   async function login() {
-    if (!userInfo.password) {
-      window.alert('Please enter your password.');
-      return;
-    }
-    const payload = {
-      email: userInfo.email,
-      password: userInfo.password,
-      isAdmin: true,
-    };
-    try{
+    try {
+      setLoading(true);
+      const payload = {
+        email: userInfo.email,
+        password: userInfo.password,
+        isAdmin: true,
+      };
       const response = await POST(ENDPOINT_URL.POST.login, payload);
       if (response.data.valid) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userID', response.data.userId);
-        
         setUserInfo({
           ...userInfo,
           userID: response.data.userId,
           username: response.data.name,
           ava: BASE + response.data.ava,
         });
-        checkAuthorized();
+        localStorage.setItem('userID', response.data.userId);
+        localStorage.setItem('username', response.data.name);
+        localStorage.setItem('userImg', BASE + response.data.ava);
       }
-    }
-    catch (error: any){
+    } catch (error: any) {
       window.alert(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   }
-  function checkAuthorized(){
-    const token = localStorage.getItem('token');
+
+  function checkAuthorized() {
     const userID = localStorage.getItem('userID');
-    if (token && userID!= null) {
-      history.push({
-        pathname: SITE_PAGES.MANAGE_ROOMS.path,
-        search: '',  
-        state: { 
-          update: true, 
-        },
-      });
+    if (userID) {
+      history.push(SITE_PAGES.MANAGE_ROOMS.path);
       return true;
     } else return false;
   }
-  
-  return(
-    <div className='w-full flex justify-center'>
-      <div className='w-1/4 h-full'>
-        <Form
-          type = 'LogIn'
-          title='Log In'
-          userInfo = {userInfo}
-          setUserInfo = {setUserInfo}
-          button = {{ label: 'Log In', onClick: login }}
-        />
-      </div>
+
+  useEffect(() => {
+    checkAuthorized();
+  }, [userInfo]);
+
+  return (
+    <div className="w-full h-full bg-brown-50 flex items-center justify-center">
+      {!loading ? (
+        <div className="shadow-md rounded-md p-4 bg-white text-center flex flex-col justify-center items-center">
+          <Form
+            type="LogIn"
+            title="Log In"
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            button={{ label: 'Log In', onClick: login }}
+          />
+          <div className="w-2/3 whitespace-pre-wrap text-sm italic text-gray-600">
+            Please login again with your user account
+          </div>
+        </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
-

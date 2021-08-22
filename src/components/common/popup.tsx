@@ -4,7 +4,7 @@ interface Props {
 
 export default function Popup(props: Props): JSX.Element {
   return (
-    <div className="fixed top-0 left-0 w-full min-h-full bg-gray bg-opacity-80 flex justify-center items-center z-30">
+    <div className="fixed top-0 left-0 w-full h-full bg-gray bg-opacity-80 flex justify-center items-center z-30">
       {props.children}
     </div>
   );

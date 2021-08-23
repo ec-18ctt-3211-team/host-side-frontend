@@ -39,7 +39,7 @@ export default function ViewARoom(): JSX.Element {
 
     if (roomID !== 'create') {
       try {
-        const response = await GET(ENDPOINT_URL.GET.getRoomsByID(roomID));
+        const response = await GET(ENDPOINT_URL.GET.getRoomByID(roomID));
         if (response.data.valid) setRoomDetails(response.data.room);
       } catch (error) {
         console.log(error);

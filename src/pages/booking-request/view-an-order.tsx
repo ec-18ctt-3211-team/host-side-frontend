@@ -1,77 +1,86 @@
-import { Layout } from 'components/common';
+import { Layout, Loading } from 'components/common';
+import { ENDPOINT_URL } from 'constants/api.const';
+import { IOrder } from 'interfaces/order.interface';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { getDateString } from 'utils/datetime.utils';
-
-const ORDER = {
-  orderID: '',
-  customerInfo: {
-    customerID: '1234567',
-    customer_name: 'ly ngoc nhi',
-    phone_number: '0123456789',
-    email: 'nhily123@gmail.com',
-    payment_method: 'paypal',
-  },
-  bookingInfo: {
-    totalAdults: 1,
-    totalKids: 0,
-    fromDate: new Date(),
-    toDate: new Date(),
-  },
-  roomID: '11111',
-  action: 'waiting',
-};
+import { GET } from 'utils/fetcher.utils';
 
 export default function ViewAnOrder(): JSX.Element {
+  const location = useLocation();
+  const [order, setOrder] = useState<IOrder>();
+  async function fetchOrder() {
+    try {
+      const path = location.pathname.split('/');
+      const orderID = path[path.length - 1];
+      const response = await GET(ENDPOINT_URL.GET.getOrderByID(orderID));
+      if (response.data.valid) {
+        setOrder(response.data.order);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchOrder();
+  }, []);
+
   return (
     <Layout>
-      <div className="h-full w-full p-8 bg-white flex rounded-lg">
-        <div className="w-1/2 px-12">
-          <div className="uppercase font-bold text-xl">
-            customer information
+      {order ? (
+        <div className="h-full w-full p-8 bg-white flex rounded-lg">
+          <div className="w-1/2 px-12">
+            <div className="uppercase font-bold text-xl text-brown-500">
+              customer information
+            </div>
+            <div className="uppercase font-bold text-base p-4 text-brown-400">
+              customer name:
+            </div>
+            <div className="px-8 border-b uppercase text-center">
+              {order.customer_name}
+            </div>
+            <div className="uppercase font-bold text-base p-4 text-brown-400">
+              phone number:
+            </div>
+            <div className="px-8 border-b text-center">
+              {order.customer_phone}
+            </div>
+            <div className="uppercase font-bold text-base p-4 text-brown-400">
+              email:
+            </div>
+            <div className="px-8 border-b text-center">{order.email}</div>
+            <div className="uppercase font-bold text-base p-4 text-brown-400">
+              payment method:
+            </div>
+            <div className="px-8 border-b uppercase text-center">Paypal</div>
           </div>
-          <div className="uppercase font-bold text-base p-4">
-            customer name:
-          </div>
-          <div className="px-8 border-b uppercase text-center">
-            {ORDER.customerInfo.customer_name}
-          </div>
-          <div className="uppercase font-bold text-base p-4">phone number:</div>
-          <div className="px-8 border-b text-center">
-            {ORDER.customerInfo.phone_number}
-          </div>
-          <div className="uppercase font-bold text-base p-4">email:</div>
-          <div className="px-8 border-b text-center">
-            {ORDER.customerInfo.email}
-          </div>
-          <div className="uppercase font-bold text-base p-4">
-            payment method:
-          </div>
-          <div className="px-8 border-b uppercase text-center">
-            {ORDER.customerInfo.payment_method}
+          <div className="w-1/2 px-12">
+            <div className="uppercase font-bold text-xl text-brown-500">
+              booking information
+            </div>
+            <div className="uppercase font-bold text-base px-4 pt-4 pb-2 text-brown-400">
+              number of guest:
+            </div>
+            <div className="flex p-4">
+              <div className="px-8 border-b">{order.num_adult}</div>
+              <div className="px-4 uppercase">adult(s)</div>
+              <div className="px-8 border-b">{order.num_kid}</div>
+              <div className="px-4 uppercase">kid(s)</div>
+            </div>
+            <div className="flex p-4">
+              <div className="pr-4 uppercase font-bold text-brown-400">
+                from
+              </div>
+              <div className="px-4 border-b">{order.day_start}</div>
+              <div className="px-4 uppercase font-bold text-brown-400">to</div>
+              <div className="px-4 border-b">{order.day_end}</div>
+            </div>
           </div>
         </div>
-        <div className="w-1/2 px-12">
-          <div className="uppercase font-bold text-xl">booking information</div>
-          <div className="uppercase font-bold text-base px-4 pt-4 pb-2">
-            number of guest:
-          </div>
-          <div className="flex p-4">
-            <div className="px-8 border-b">{ORDER.bookingInfo.totalAdults}</div>
-            <div className="px-4 uppercase">adult(s)</div>
-            <div className="px-8 border-b">{ORDER.bookingInfo.totalKids}</div>
-            <div className="px-4 uppercase">kid(s)</div>
-          </div>
-          <div className="flex p-4">
-            <div className="pr-4 uppercase font-bold">from</div>
-            <div className="px-4 border-b">
-              {getDateString(ORDER.bookingInfo.fromDate)}
-            </div>
-            <div className="px-4 uppercase font-bold">to</div>
-            <div className="px-4 border-b">
-              {getDateString(ORDER.bookingInfo.toDate)}
-            </div>
-          </div>
-        </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </Layout>
   );
 }

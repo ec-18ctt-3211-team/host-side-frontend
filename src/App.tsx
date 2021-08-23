@@ -15,6 +15,9 @@ function App() {
         <Route exact path={SITE_PAGES.MANAGE_ROOMS.path}>
           <Pages.ListOfRooms />
         </Route>
+        <Route exact path={SITE_PAGES.CREATE_A_ROOM.path}>
+          <Pages.CreateARoom />
+        </Route>
         <Route path={SITE_PAGES.VIEW_A_ROOM.path}>
           <Pages.ViewARoom />
         </Route>

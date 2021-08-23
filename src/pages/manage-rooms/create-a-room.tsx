@@ -1,43 +1,32 @@
 import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
-import { Icon, editSolid, binSolid } from 'utils/icon.utils';
-import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { Icon, editSolid } from 'utils/icon.utils';
+import { useState } from 'react';
 import { GET } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { UploadImage } from 'components/section/manage-rooms';
-import { SITE_PAGES } from 'constants/pages.const';
 
-export default function ViewARoom(): JSX.Element {
-  const location = useLocation();
-  const history = useHistory();
-  const [roomDetails, setRoomDetails] = useState<IRoomDetail>();
+const defaultRoom: IRoomDetail = {
+  _id: '',
+  host_id: localStorage.getItem('userID') ?? '',
+  title: '',
+  thumnail: '',
+  max_guest: 0,
+  address: { number: '', street: '', ward: '', district: '', city: '' },
+  description: '',
+  normal_price: 0,
+  weekend_price: 0,
+  created_at: '',
+  deleted_at: null,
+};
 
-  async function fetchRoom() {
-    const path = location.pathname.split('/');
-    const roomID = path[path.length - 1];
-    try {
-      const response = await GET(ENDPOINT_URL.GET.getRoomByID(roomID));
-      if (response.data.valid) {
-        setRoomDetails(response.data.room);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+export default function CreateARoom(): JSX.Element {
+  const [roomDetails, setRoomDetails] = useState<IRoomDetail>(defaultRoom);
 
-  async function updateRoom() {
+  async function createRoom() {
     const payload = new FormData();
     payload.append('img_0', '');
   }
-
-  async function deleteRoom() {
-    history.push(SITE_PAGES.MANAGE_ROOMS.path);
-  }
-
-  useEffect(() => {
-    fetchRoom();
-  }, []);
 
   return (
     <Layout>
@@ -85,15 +74,8 @@ export default function ViewARoom(): JSX.Element {
               }
               className="h-full w-full outline-none border rounded p-2 my-4"
             />
-            <div className="h-1/6 flex">
-              <div className="p-2 w-2/3">
-                <Button onClick={() => updateRoom()}>Update</Button>
-              </div>
-              <div className="p-2 w-1/3">
-                <Button onClick={() => deleteRoom()}>
-                  <Icon icon={binSolid} />
-                </Button>
-              </div>
+            <div className="h-1/6 p-2">
+              <Button onClick={() => createRoom()}>Create</Button>
             </div>
           </div>
           <div className="h-full w-full ml-4 p-4 bg-white flex rounded-lg flex-wrap">

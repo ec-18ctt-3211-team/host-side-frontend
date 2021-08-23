@@ -11,8 +11,9 @@ import passwordOutline from '@iconify/icons-teenyicons/password-outline';
 import addSmallOutline from '@iconify/icons-teenyicons/add-small-outline';
 import minusSmallOutline from '@iconify/icons-teenyicons/minus-small-outline';
 import idSolid from '@iconify/icons-teenyicons/id-solid';
-import edit1Solid from '@iconify/icons-teenyicons/edit-1-solid';
+import editSolid from '@iconify/icons-teenyicons/edit-solid';
 import logoutOutline from '@iconify/icons-teenyicons/logout-outline';
+import binSolid from '@iconify/icons-teenyicons/bin-solid';
 
 export {
   Icon,
@@ -29,6 +30,7 @@ export {
   addSmallOutline,
   minusSmallOutline,
   idSolid,
-  edit1Solid,
+  editSolid,
   logoutOutline,
+  binSolid,
 };

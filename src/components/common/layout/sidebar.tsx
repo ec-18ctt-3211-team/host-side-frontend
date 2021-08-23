@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
-import { IUserInfo } from 'interfaces/user.interface';
+import { Icon, logoutOutline } from 'utils/icon.utils';
 
 const Menu = (props: {
   data: { label: string; path: string };
@@ -37,6 +37,10 @@ export default function Sidebar(): JSX.Element {
       </Link>
       <Menu data={SITE_PAGES.MANAGE_ROOMS} />
       <Menu data={SITE_PAGES.BOOKING_REQUEST} />
+      <div className="mt-auto flex justify-evenly items-center px-4 py-2 select-none cursor-pointer hover:text-brown-500 hover:text-lg">
+        <Icon icon={logoutOutline} className="text-2xl" />
+        <div>Log out</div>
+      </div>
     </div>
   );
 }

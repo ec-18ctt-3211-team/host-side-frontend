@@ -16,13 +16,13 @@ export default function ListOfRequest(): JSX.Element {
   const [loading, setLoading] = useState(false);
 
   async function fetchOrders() {
+    const host_id = localStorage.getItem('userID');
+    if (host_id === null) {
+      history.push('/');
+      return;
+    }
     try {
-      const host_id = localStorage.getItem('userID');
-      if (host_id === null) {
-        history.push('/');
-        return;
-      }
-
+      setLoading(true);
       const response = await fetcher.GET(
         ENDPOINT_URL.GET.getAllOrders(
           host_id,
@@ -30,10 +30,16 @@ export default function ListOfRequest(): JSX.Element {
           currentPage + 1,
         ),
       );
-      setOrders(response.data.orders);
-      setMaxPage(Math.max(Math.ceil(response.data.total / items_per_pages), 1));
+      if (response.data.valid) {
+        setOrders(response.data.orders);
+        setMaxPage(
+          Math.max(Math.ceil(response.data.total / items_per_pages), 1),
+        );
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -43,15 +49,17 @@ export default function ListOfRequest(): JSX.Element {
 
   async function updateOrder(status: string, orderID: string, index: number) {
     if (!orders) return;
-    setLoading(true);
     try {
+      setLoading(true);
       const response = await fetcher.PUT(
         ENDPOINT_URL.PUT.updateOrderStatus + `/${orderID}`,
         { status },
       );
-      const newOrders = orders.slice();
-      newOrders[index] = response.data.updatedOrder;
-      setOrders(newOrders.slice());
+      if (response.data.valid) {
+        const newOrders = orders.slice();
+        newOrders[index] = response.data.updatedOrder;
+        setOrders(newOrders.slice());
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -61,14 +69,10 @@ export default function ListOfRequest(): JSX.Element {
 
   function renderTable() {
     if (!orders) return;
+
     return (
       <tbody className="text-center">
         {orders.map((item, index) => {
-          if (
-            index < currentPage * items_per_pages + 1 ||
-            index > currentPage * items_per_pages + items_per_pages
-          )
-            return;
           return (
             <tr
               key={item._id}
@@ -77,28 +81,29 @@ export default function ListOfRequest(): JSX.Element {
                 (index > 0 && index % items_per_pages === 0) ||
                 index === orders.length - 1
                   ? ''
-                  : 'border-b',
+                  : 'border-b-2 border-brown-500',
               ].join(' ')}
             >
-              <td className="border-r py-4 w-4/12">
-                {/* <Link to={SITE_PAGES.BOOKING_REQUEST.path + `/${item._id}`}>
-                  <div className="hover:text-brown-400 hover:font-bold">
+              <td className="border-r-2 border-brown-500 py-4">
+                <Link to={SITE_PAGES.VIEW_AN_ORDER.path + `/${item._id}`}>
+                  <div className="italic hover:text-brown-400 hover:underline">
                     {item._id}
                   </div>
-                </Link> */}
-                <div>{item._id}</div>
+                </Link>
               </td>
-              <td className="border-r py-4 w-2/12">{item.customer_name}</td>
-              <td className="border-r py-4 w-4/12">
+              <td className="border-r-2 border-brown-500 py-4">
+                {item.customer_name}
+              </td>
+              <td className="border-r-2 border-brown-500 py-4">
                 <Link to={SITE_PAGES.MANAGE_ROOMS.path + `/${item.room_id}`}>
-                  <div className="hover:text-brown-400 hover:font-bold">
+                  <div className="italic hover:text-brown-400 hover:underline">
                     {item.room_id}
                   </div>
                 </Link>
               </td>
               <td
                 className={[
-                  'py-4 select-none w-2/12',
+                  'py-4 select-none',
                   OrderStatusLabels[item.status].color,
                 ].join(' ')}
               >
@@ -108,10 +113,9 @@ export default function ListOfRequest(): JSX.Element {
                   className="outline-none"
                   onChange={(e) => updateOrder(e.target.value, item._id, index)}
                   value={item.status}
+                  disabled={item.status !== 'pending'}
                 >
-                  {item.status === 'pending' && (
-                    <option value="pending">Pending</option>
-                  )}
+                  <option value="pending">Pending</option>
                   <option value="accepted">Accepted</option>
                   <option value="rejected">Rejected</option>
                 </select>
@@ -128,11 +132,11 @@ export default function ListOfRequest(): JSX.Element {
       {!loading && orders ? (
         <div className="h-full w-full p-4 bg-white flex flex-col items-center rounded-lg">
           <table className="table-auto w-full">
-            <thead className="bg-brown-50">
-              <tr className="border-b uppercase">
-                <th className="border-r py-4">Order ID</th>
-                <th className="border-r py-4">Customer</th>
-                <th className="border-r py-4">Room ID</th>
+            <thead>
+              <tr className="border-b-2 border-brown-500 uppercase bg-brown-100">
+                <th className="border-r-2 border-brown-500 py-6">Order ID</th>
+                <th className="border-r-2 border-brown-500 py-6">Customer</th>
+                <th className="border-r-2 border-brown-500 py-6">Room ID</th>
                 <th className="py-6">ACTION</th>
               </tr>
             </thead>

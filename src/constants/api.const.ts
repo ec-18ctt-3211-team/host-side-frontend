@@ -6,11 +6,13 @@ export const ENDPOINT_URL = {
     getAllRooms: (host_id: string, limit: number, page: number) =>
       `/rooms/host/${host_id}?limit=${limit}&page=${page}`,
     getRoomByID: (id: string) => `/rooms/${id}`,
+    getCustomerByID: (id: string) => `/customer/${id}`,
   },
   POST: {
     login: '/auth/login',
   },
   PUT: {
     updateOrderStatus: '/order',
+    updateCustomerByID: (id: string) => `/customer/${id}`,
   },
 };

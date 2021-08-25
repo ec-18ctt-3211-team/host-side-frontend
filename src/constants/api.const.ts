@@ -15,4 +15,7 @@ export const ENDPOINT_URL = {
     updateOrderStatus: '/order',
     updateRoom: (id: string) => `/rooms/${id}`,
   },
+  DELETE: {
+    deleteRoom: (id: string) => `/rooms/${id}`,
+  },
 };

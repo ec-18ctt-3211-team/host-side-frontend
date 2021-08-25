@@ -8,8 +8,9 @@ interface Props {
 
 export default function UploadImage(props: Props): JSX.Element {
   const [preview, setPreview] = useState<string | null>(
-    props.image ? BASE + props.image.path : '',
+    props.image ? props.image.path : '',
   );
+  const [message, setMessage] = useState('Choose image to Upload');
   const uploadImage = useRef<HTMLInputElement>(null);
 
   function uploadAnImage() {
@@ -22,8 +23,12 @@ export default function UploadImage(props: Props): JSX.Element {
           props.setImage(reader.result as string);
         }
       };
-      if (uploaded.files[0]) {
+      if (uploaded.files[0] && uploaded.files[0].size <= 1024 * 1024) {
         reader.readAsDataURL(uploaded.files[0]);
+      } else {
+        setMessage('Image must be under 1MB');
+        setPreview(null);
+        props.setImage('');
       }
     }
   }
@@ -43,9 +48,13 @@ export default function UploadImage(props: Props): JSX.Element {
         }}
       >
         {!preview ? (
-          <div className="py-8 text-sm">Choose image to Upload</div>
+          <div className="py-8 text-sm">{message}</div>
         ) : (
-          <img src={preview} alt="upload" />
+          <img
+            src={preview}
+            alt="upload"
+            className="w-full h-full object-contain"
+          />
         )}
       </div>
     </div>

@@ -8,16 +8,15 @@ import {
   Loading,
   Button,
 } from 'components/common';
-import { ROOMS } from 'constants/images.const';
 import { Icon, edit1Solid, binSolid, editSolid } from 'utils/icon.utils';
 import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { GET, PUT } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
-import { UploadImage } from 'components/section/manage-rooms';
 import { SITE_PAGES } from 'constants/pages.const';
 import { IImage } from 'interfaces/image.interface';
+import  UploadImage from 'components/section/manage-rooms/uploadImage';
 
 const defaultPhoto : IImage[]= [{ _id: '', path: '' }];
 const defaultRoom: IRoomDetail = {

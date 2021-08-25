@@ -41,6 +41,8 @@ export default function HostLogin() {
         localStorage.setItem('userID', response.data.userId);
         localStorage.setItem('username', response.data.name);
         localStorage.setItem('userImg', BASE + response.data.ava);
+
+        history.push(SITE_PAGES.MANAGE_ROOMS.path);
       }
     } catch (error: any) {
       setMessage(error.response.data.message);
@@ -48,18 +50,6 @@ export default function HostLogin() {
       setLoading(false);
     }
   }
-
-  function checkAuthorized() {
-    const userID = localStorage.getItem('userID');
-    if (userID) {
-      history.push(SITE_PAGES.MANAGE_ROOMS.path);
-      return true;
-    } else return false;
-  }
-
-  useEffect(() => {
-    checkAuthorized();
-  }, [userInfo]);
 
   return (
     <div className="w-full h-full bg-brown-50 flex items-center justify-center">

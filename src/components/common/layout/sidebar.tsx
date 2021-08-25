@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SITE_PAGES } from 'constants/pages.const';
 import { Icon, logoutOutline } from 'utils/icon.utils';
 
@@ -18,6 +18,14 @@ const Menu = (props: {
 export default function Sidebar(): JSX.Element {
   const username = localStorage.getItem('username');
   const userImg = localStorage.getItem('userImg');
+
+  const history = useHistory();
+  function Logout(){
+    localStorage.removeItem('userID');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userImg');
+    history.push(SITE_PAGES.HOST_LOGIN.path);
+  }
   return (
     <div className="bg-white w-[232px] h-full flex flex-col">
       <Link
@@ -39,7 +47,7 @@ export default function Sidebar(): JSX.Element {
       <Menu data={SITE_PAGES.BOOKING_REQUEST} />
       <div className="mt-auto flex justify-evenly items-center px-4 py-2 select-none cursor-pointer hover:text-brown-500 hover:text-lg">
         <Icon icon={logoutOutline} className="text-2xl" />
-        <div>Log out</div>
+        <div onClick={Logout}>Log out</div>
       </div>
     </div>
   );

@@ -19,11 +19,11 @@ export default function UploadImage(props: Props): JSX.Element {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setPreview(reader.result as string);
+          props.setImage(reader.result as string);
         }
       };
       if (uploaded.files[0]) {
         reader.readAsDataURL(uploaded.files[0]);
-        props.setImage(uploaded.files[0]);
       }
     }
   }

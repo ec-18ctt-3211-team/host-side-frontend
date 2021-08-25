@@ -7,7 +7,7 @@ import { IRoomDetail } from 'interfaces/room.interface';
 import { useHistory } from 'react-router';
 import { SITE_PAGES } from 'constants/pages.const';
 
-const LIMIT = 10;
+const LIMIT = 8;
 
 export default function ListOfRooms(): JSX.Element {
   const history = useHistory();

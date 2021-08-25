@@ -27,7 +27,7 @@ export interface IRoomDetail {
   _id: string;
   title: string;
   thumnail: string;
-  photos?: IImage[];
+  photos?: IImage[] | Blob[];
   max_guest: number;
   host_id: string;
   address: IRoomAddress;

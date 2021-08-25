@@ -1,10 +1,11 @@
 import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
 import { Icon, editSolid } from 'utils/icon.utils';
 import { useState } from 'react';
-import { GET } from 'utils/fetcher.utils';
+import { GET, POST } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { UploadImage } from 'components/section/manage-rooms';
+import { IImage } from 'interfaces/image.interface';
 
 const defaultRoom: IRoomDetail = {
   _id: '',
@@ -22,15 +23,62 @@ const defaultRoom: IRoomDetail = {
 
 export default function CreateARoom(): JSX.Element {
   const [roomDetails, setRoomDetails] = useState<IRoomDetail>(defaultRoom);
+  const [loading, setLoading] = useState(false);
+
+  function checkData() {
+    if (
+      !roomDetails.photos ||
+      roomDetails.host_id === '' ||
+      roomDetails.description === '' ||
+      roomDetails.normal_price <= 0 ||
+      roomDetails.weekend_price <= 0 ||
+      roomDetails.max_guest <= 0 ||
+      roomDetails.title === '' ||
+      roomDetails.address.number === '' ||
+      roomDetails.address.street === '' ||
+      roomDetails.address.ward === '' ||
+      roomDetails.address.district === '' ||
+      roomDetails.address.city === ''
+    ) {
+      return false;
+    }
+    return true;
+  }
 
   async function createRoom() {
-    const payload = new FormData();
-    payload.append('img_0', '');
+    console.log(roomDetails);
+    if (!checkData || !roomDetails.photos) return;
+    try {
+      setLoading(true);
+      // const payload = new FormData();
+      // payload.append('img_1', roomDetails.photos[0] as Blob);
+      // payload.append('img_2', roomDetails.photos[1] as Blob);
+      // payload.append('img_3', roomDetails.photos[2] as Blob);
+      // payload.append('img_4', roomDetails.photos[3] as Blob);
+      // payload.append('host_id', roomDetails.host_id);
+      // payload.append('description', roomDetails.description);
+      // payload.append('normal_price', roomDetails.normal_price.toString());
+      // payload.append('weekend_price', roomDetails.weekend_price.toString());
+      // payload.append('max_guest', roomDetails.max_guest.toString());
+      // payload.append('title', roomDetails.title);
+      // payload.append('address[number]', roomDetails.address.number);
+      // payload.append('address[street]', roomDetails.address.street);
+      // payload.append('address[ward]', roomDetails.address.ward);
+      // payload.append('address[district]', roomDetails.address.district);
+      // payload.append('address[city]', roomDetails.address.city);
+
+      const response = POST(ENDPOINT_URL.POST.createRoom, roomDetails);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <Layout>
-      {roomDetails ? (
+      {roomDetails && !loading ? (
         <div className="flex h-full w-full">
           <div className="h-full w-2/5 p-4 bg-white flex flex-col rounded-lg">
             <div className="my-4 mx-2">
@@ -46,20 +94,113 @@ export default function CreateARoom(): JSX.Element {
             </div>
             <div className="px-4 py-2">
               <InputNumber
-                label="bedroom(s)"
+                label="guest(s)"
                 value={roomDetails.max_guest}
                 setValue={(max_guest) =>
                   setRoomDetails({ ...roomDetails, max_guest })
                 }
               />
             </div>
-            <div className="px-4 py-2">
-              <InputNumber
-                label="per night"
-                value={roomDetails.normal_price}
-                setValue={(normal_price) =>
-                  setRoomDetails({ ...roomDetails, normal_price })
-                }
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-2/3">Normal price:</div>
+              <input
+                type="number"
+                className="outline-none border rounded w-1/3 p-1"
+                defaultValue={roomDetails.normal_price}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    normal_price: parseInt(e.target.value),
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-2/3">Weekend price:</div>
+              <input
+                type="number"
+                className="outline-none border rounded w-1/3 p-1"
+                defaultValue={roomDetails.weekend_price}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    weekend_price: parseInt(e.target.value),
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2">Address:</div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-1/2">Number:</div>
+              <input
+                type="text"
+                className="outline-none border rounded w-1/2 p-1"
+                defaultValue={roomDetails.address.number}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    address: { ...roomDetails.address, number: e.target.value },
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-1/2">Street:</div>
+              <input
+                type="text"
+                className="outline-none border rounded w-1/2 p-1"
+                defaultValue={roomDetails.address.street}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    address: { ...roomDetails.address, street: e.target.value },
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-1/2">Ward:</div>
+              <input
+                type="text"
+                className="outline-none border rounded w-1/2 p-1"
+                defaultValue={roomDetails.address.ward}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    address: { ...roomDetails.address, ward: e.target.value },
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-1/2">District:</div>
+              <input
+                type="text"
+                className="outline-none border rounded w-1/2 p-1"
+                defaultValue={roomDetails.address.district}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    address: {
+                      ...roomDetails.address,
+                      district: e.target.value,
+                    },
+                  });
+                }}
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center">
+              <div className="w-1/2">City:</div>
+              <input
+                type="text"
+                className="outline-none border rounded w-1/2 p-1"
+                defaultValue={roomDetails.address.city}
+                onChange={(e) => {
+                  setRoomDetails({
+                    ...roomDetails,
+                    address: { ...roomDetails.address, city: e.target.value },
+                  });
+                }}
               />
             </div>
             <textarea
@@ -74,7 +215,7 @@ export default function CreateARoom(): JSX.Element {
               }
               className="h-full w-full outline-none border rounded p-2 my-4"
             />
-            <div className="h-1/6 p-2">
+            <div className="h-1/6 p-2 select-none">
               <Button onClick={() => createRoom()}>Create</Button>
             </div>
           </div>
@@ -83,8 +224,10 @@ export default function CreateARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[0] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
                   newPhotos[0] = image;
                   setRoomDetails({
                     ...roomDetails,
@@ -97,8 +240,10 @@ export default function CreateARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[1] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
                   newPhotos[1] = image;
                   setRoomDetails({
                     ...roomDetails,
@@ -111,8 +256,10 @@ export default function CreateARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[3] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
                   newPhotos[2] = image;
                   setRoomDetails({
                     ...roomDetails,
@@ -125,8 +272,10 @@ export default function CreateARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[4] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
                   newPhotos[3] = image;
                   setRoomDetails({
                     ...roomDetails,

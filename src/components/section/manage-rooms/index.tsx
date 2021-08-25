@@ -1,3 +1,4 @@
 import RoomCard from './RoomCard';
+import UploadImage from './uploadImage';
 
-export { RoomCard };
+export { RoomCard, UploadImage };

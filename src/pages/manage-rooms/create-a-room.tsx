@@ -1,40 +1,32 @@
 import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
-import { Icon, editSolid, binSolid } from 'utils/icon.utils';
-import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import { DELETE, GET, PUT } from 'utils/fetcher.utils';
+import { Icon, editSolid } from 'utils/icon.utils';
+import { useState } from 'react';
+import { POST } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
 import { UploadImage } from 'components/section/manage-rooms';
-import { SITE_PAGES } from 'constants/pages.const';
 import { IImage } from 'interfaces/image.interface';
+import { useHistory } from 'react-router';
+import { SITE_PAGES } from 'constants/pages.const';
 import { IMAGES } from 'constants/images.const';
 
-export default function ViewARoom(): JSX.Element {
-  const location = useLocation();
-  const history = useHistory();
-  const [roomDetails, setRoomDetails] = useState<IRoomDetail>();
-  const [loading, setLoading] = useState(false);
+const defaultRoom: IRoomDetail = {
+  host_id: localStorage.getItem('userID') ?? '',
+  title: '',
+  max_guest: 0,
+  address: { number: '', street: '', ward: '', district: '', city: '' },
+  description: '',
+  normal_price: 0,
+  weekend_price: 0,
+};
 
-  async function fetchRoom() {
-    const path = location.pathname.split('/');
-    const roomID = path[path.length - 1];
-    try {
-      setLoading(true);
-      const response = await GET(ENDPOINT_URL.GET.getRoomByID(roomID));
-      if (response.data.valid) {
-        setRoomDetails(response.data.room);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+export default function CreateARoom(): JSX.Element {
+  const history = useHistory();
+  const [roomDetails, setRoomDetails] = useState<IRoomDetail>(defaultRoom);
+  const [loading, setLoading] = useState(false);
 
   function checkData() {
     if (
-      !roomDetails ||
       !roomDetails.photos ||
       roomDetails.photos.length === 4 ||
       roomDetails.host_id === '' ||
@@ -54,29 +46,11 @@ export default function ViewARoom(): JSX.Element {
     return true;
   }
 
-  async function updateRoom() {
-    if (!checkData || !roomDetails || !roomDetails._id) return;
+  async function createRoom() {
+    if (!checkData || !roomDetails.photos) return;
     try {
       setLoading(true);
-      const response = await PUT(
-        ENDPOINT_URL.PUT.updateRoom(roomDetails._id),
-        roomDetails,
-      );
-      if (response.data.valid) history.push(SITE_PAGES.MANAGE_ROOMS.path);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function deleteRoom() {
-    if (!roomDetails || !roomDetails._id) return;
-    try {
-      setLoading(true);
-      const response = await DELETE(
-        ENDPOINT_URL.DELETE.deleteRoom(roomDetails?._id),
-      );
+      const response = await POST(ENDPOINT_URL.POST.createRoom, roomDetails);
       if (response.status === 204) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
       console.log(error);
@@ -84,10 +58,6 @@ export default function ViewARoom(): JSX.Element {
       setLoading(false);
     }
   }
-
-  useEffect(() => {
-    fetchRoom();
-  }, []);
 
   return (
     <Layout>
@@ -233,15 +203,8 @@ export default function ViewARoom(): JSX.Element {
               }
               className="h-full w-full outline-none border rounded p-2 my-4"
             />
-            <div className="h-1/6 flex select-none">
-              <div className="p-2 w-2/3">
-                <Button onClick={() => updateRoom()}>Update</Button>
-              </div>
-              <div className="p-2 w-1/3">
-                <Button onClick={() => deleteRoom()}>
-                  <Icon icon={binSolid} />
-                </Button>
-              </div>
+            <div className="h-1/6 p-2 select-none">
+              <Button onClick={() => createRoom()}>Create</Button>
             </div>
           </div>
           <div className="h-full w-full ml-4 p-4 bg-white flex rounded-lg flex-wrap">
@@ -253,7 +216,7 @@ export default function ViewARoom(): JSX.Element {
                   newPhotos.length = 4;
                   if (roomDetails.photos)
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[0] = { ...newPhotos[0], path: image };
+                  newPhotos[0] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -269,7 +232,7 @@ export default function ViewARoom(): JSX.Element {
                   newPhotos.length = 4;
                   if (roomDetails.photos)
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[1] = { ...newPhotos[1], path: image };
+                  newPhotos[1] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -285,7 +248,7 @@ export default function ViewARoom(): JSX.Element {
                   newPhotos.length = 4;
                   if (roomDetails.photos)
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[2] = { ...newPhotos[2], path: image };
+                  newPhotos[2] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -301,7 +264,7 @@ export default function ViewARoom(): JSX.Element {
                   newPhotos.length = 4;
                   if (roomDetails.photos)
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[3] = { ...newPhotos[3], path: image };
+                  newPhotos[3] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),

@@ -1,5 +1,5 @@
 import { IImage } from 'interfaces/image.interface';
-import { SITE_PAGES } from './pages.const';
+// import { SITE_PAGES } from './pages.const';
 
 export const IMAGES: IImage[] = [
   {

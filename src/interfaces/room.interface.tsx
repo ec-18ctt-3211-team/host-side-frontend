@@ -24,9 +24,9 @@ export interface ISpecialPrice {
 }
 
 export interface IRoomDetail {
-  _id: string;
+  _id?: string;
   title: string;
-  thumnail: string;
+  thumnail?: string;
   photos?: IImage[];
   max_guest: number;
   host_id: string;
@@ -36,8 +36,8 @@ export interface IRoomDetail {
   weekend_price: number;
   extraPrices?: ISpecialPrice[];
   bookingDates?: IBookingDate[];
-  created_at: string;
-  deleted_at: string | null;
+  created_at?: string;
+  deleted_at?: string | null;
   __v?: number;
 }
 

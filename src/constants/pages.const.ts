@@ -11,6 +11,10 @@ export const SITE_PAGES = {
     label: 'View a room',
     path: '/manage-rooms',
   },
+  CREATE_A_ROOM: {
+    label: 'Create a room',
+    path: '/manage-rooms/create',
+  },
   BOOKING_REQUEST: {
     label: 'Booking request',
     path: '/booking-request',

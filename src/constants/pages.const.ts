@@ -19,4 +19,8 @@ export const SITE_PAGES = {
     label: 'View an order',
     path: '/booking-request',
   },
+  HOST_LOGIN: {
+    label: 'Host login',
+    path: '/',
+  }
 };

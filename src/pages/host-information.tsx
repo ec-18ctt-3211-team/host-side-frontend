@@ -39,6 +39,9 @@ export default function HostInfomation(): JSX.Element {
 
   async function updateProfile() {
     if (!userInfo) return;
+    if (!userInfo.password || userInfo.password === ''){
+      window.alert('Please enter your current or new password');
+    }
     try {
       setLoading(true);
       const payload = {

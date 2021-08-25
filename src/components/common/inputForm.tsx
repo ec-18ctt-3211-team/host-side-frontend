@@ -22,7 +22,7 @@ interface Props {
 
 export default function Form(props: Props): JSX.Element {
   const [password, setPassword] = useState('');
-  const [isMatched, setMatched] = useState<boolean>(true);
+  const [isMatched, setMatched] = useState<boolean>(false);
 
   return (
     <div className="bg-white rounded-xl h-full w-full flex flex-col justify-between items-center p-6 select-none">
@@ -158,12 +158,12 @@ export default function Form(props: Props): JSX.Element {
       {/* button */}
       {props.type === 'Info' &&
         <div className="py-2 h-full w-full flex justify-center items-center">
-          {isMatched ? (
+          {isMatched && password !== '' ? (
             <Button onClick={props.button.onClick} className="w-2/3 h-full">
               {props.button.label}
             </Button>
           ) : (
-            <div className="text-xs text-error">Passwords is not matched</div>
+            <div className="text-xs text-error">Passwords is not enter or is not matched</div>
           )}
         </div>
       }

@@ -50,7 +50,7 @@ export default function HostInfomation(): JSX.Element {
         password: userInfo.password,
         phone: userInfo.phone_number,
       };
-      console.log(userInfo.userID);
+      
       const response = await PUT(
         ENDPOINT_URL.PUT.updateCustomerByID(userInfo.userID),
         payload,

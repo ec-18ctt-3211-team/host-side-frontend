@@ -1,24 +1,13 @@
-import {
-  ImageSlider,
-  Layout,
-  Input,
-  SelectOption,
-  InputNumber,
-  DivPx,
-  Loading,
-  Button,
-} from 'components/common';
-import { ROOMS } from 'constants/images.const';
-import { Icon, edit1Solid, binSolid, editSolid } from 'utils/icon.utils';
-import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import { GET, PUT } from 'utils/fetcher.utils';
+import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
+import { Icon, editSolid } from 'utils/icon.utils';
+import { useState } from 'react';
+import { GET, POST } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
 import { IRoomDetail } from 'interfaces/room.interface';
-import { UploadImage } from 'components/section/manage-rooms';
-import { SITE_PAGES } from 'constants/pages.const';
+import UploadImage from 'components/section/manage-rooms/uploadImage';
 import { IImage } from 'interfaces/image.interface';
-
+import { useHistory } from 'react-router';
+import { SITE_PAGES } from 'constants/pages.const';
 const defaultPhoto : IImage[]= [{ _id: '', path: '' }];
 const defaultRoom: IRoomDetail = {
   _id: '',
@@ -35,15 +24,13 @@ const defaultRoom: IRoomDetail = {
   deleted_at: null,
 };
 
-export default function ViewARoom(): JSX.Element {
-  const location = useLocation();
-  const history = useHistory();
+export default function CreateARoom(): JSX.Element {
   const [roomDetails, setRoomDetails] = useState<IRoomDetail>(defaultRoom);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   function checkData() {
     if (
-      !roomDetails ||
       !roomDetails.photos ||
       roomDetails.host_id === '' ||
       roomDetails.description === '' ||
@@ -63,25 +50,8 @@ export default function ViewARoom(): JSX.Element {
     return true;
   }
 
-  async function fetchRoom() {
-    const path = location.pathname.split('/');
-    const roomID = path[path.length - 1];
-    try {
-      setLoading(true);
-      const response = await GET(ENDPOINT_URL.GET.getRoomByID(roomID));
-      if (response.data.valid) {
-        setRoomDetails(response.data.room);
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
-    finally{
-      setLoading(false);
-    }
-  }
-
-  async function updateRoom() {
-    if (!checkData || !roomDetails) {
+  async function createRoom() {
+    if (!checkData || !roomDetails.photos) {
       window.alert('Please fulfill all fields to continue.');
       return;
     }
@@ -100,11 +70,11 @@ export default function ViewARoom(): JSX.Element {
       console.log('Payload');
       console.log(payload);
 
-      const response = await PUT(ENDPOINT_URL.PUT.updateRoom(roomDetails._id), payload);
+      const response = await POST(ENDPOINT_URL.POST.createRoom, payload);
       console.log(response);
       if( response.status == 200){
         if(response.data.valid){
-          window.alert('Update room successffully');
+          window.alert('Create room successffully');
           history.push(SITE_PAGES.MANAGE_ROOMS.path);
         }
       }
@@ -115,18 +85,10 @@ export default function ViewARoom(): JSX.Element {
     }
   }
 
-  async function deleteRoom() {
-    history.push(SITE_PAGES.MANAGE_ROOMS.path);
-  }
-
-  useEffect(() => {
-    fetchRoom();
-  }, []);
-  
   return (
     <Layout>
       {roomDetails && !loading ? (
-        <div className="flex h-full w-full">
+        <div className="flex w-full h-full">
           <div className="h-full w-2/5 p-4 bg-white flex flex-col rounded-lg">
             <div className="my-4 mx-2">
               <Input
@@ -141,7 +103,7 @@ export default function ViewARoom(): JSX.Element {
             </div>
             <div className="px-4 py-2">
               <InputNumber
-                label="max guest(s)"
+                label="guest(s)"
                 value={roomDetails.max_guest}
                 setValue={(max_guest) =>
                   setRoomDetails({ ...roomDetails, max_guest })
@@ -262,15 +224,8 @@ export default function ViewARoom(): JSX.Element {
               }
               className="h-full w-full outline-none border rounded p-2 my-4"
             />
-            <div className="h-1/6 flex">
-              <div className="p-2 w-2/3">
-                <Button onClick={() => updateRoom()}>Update</Button>
-              </div>
-              <div className="p-2 w-1/3">
-                <Button onClick={() => deleteRoom()}>
-                  <Icon icon={binSolid} />
-                </Button>
-              </div>
+            <div className="mr-auto p-2 select-none">
+              <Button onClick={() => createRoom()}>Create</Button>
             </div>
           </div>
           <div className="h-full w-full ml-4 p-4 bg-white flex rounded-lg flex-wrap">
@@ -278,9 +233,11 @@ export default function ViewARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[0] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
-                  newPhotos[0] = { ...newPhotos[0], path: image };
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
+                  newPhotos[0] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -292,9 +249,11 @@ export default function ViewARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[1] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
-                  newPhotos[1] = { ...newPhotos[1], path: image };
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
+                  newPhotos[1] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -306,9 +265,11 @@ export default function ViewARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[2] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
-                  newPhotos[2] = { ...newPhotos[2], path: image };
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
+                  newPhotos[2] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -320,14 +281,15 @@ export default function ViewARoom(): JSX.Element {
               <UploadImage
                 image={roomDetails.photos ? roomDetails.photos[3] : null}
                 setImage={(image) => {
-                  if (!roomDetails.photos) return;
-                  const newPhotos = roomDetails.photos.slice();
-                  newPhotos[3] = { ...newPhotos[3], path: image };
+                  let newPhotos: IImage[] | Blob[] = [];
+                  newPhotos.length = 4;
+                  if (roomDetails.photos)
+                    newPhotos = roomDetails.photos.slice();
+                  newPhotos[3] = image;
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
-                  }
-                  );
+                  });
                 }}
               />
             </div>
@@ -339,3 +301,18 @@ export default function ViewARoom(): JSX.Element {
     </Layout>
   );
 }
+// payload.append('img_1', roomDetails.photos[0] as Blob);
+// payload.append('img_2', roomDetails.photos[1] as Blob);
+// payload.append('img_3', roomDetails.photos[2] as Blob);
+// payload.append('img_4', roomDetails.photos[3] as Blob);
+// payload.append('host_id', roomDetails.host_id);
+// payload.append('description', roomDetails.description);
+// payload.append('normal_price', roomDetails.normal_price.toString());
+// payload.append('weekend_price', roomDetails.weekend_price.toString());
+// payload.append('max_guest', roomDetails.max_guest.toString());
+// payload.append('title', roomDetails.title);
+// payload.append('address[number]', roomDetails.address.number);
+// payload.append('address[street]', roomDetails.address.street);
+// payload.append('address[ward]', roomDetails.address.ward);
+// payload.append('address[district]', roomDetails.address.district);
+// payload.append('address[city]', roomDetails.address.city);

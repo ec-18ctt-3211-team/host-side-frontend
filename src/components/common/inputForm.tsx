@@ -163,7 +163,7 @@ export default function Form(props: Props): JSX.Element {
               {props.button.label}
             </Button>
           ) : (
-            <div className="text-xs text-error">Passwords is not enter or is not matched</div>
+            <div className="text-xs text-error">Passwords is not enter or not matched</div>
           )}
         </div>
       }

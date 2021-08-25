@@ -10,9 +10,11 @@ export const ENDPOINT_URL = {
   },
   POST: {
     login: '/auth/login',
+    createRoom: '/rooms'
   },
   PUT: {
     updateOrderStatus: '/order',
+    updateRoom: (id: string) => `/rooms/${id}`,
     updateCustomerByID: (id: string) => `/customer/${id}`,
   },
 };

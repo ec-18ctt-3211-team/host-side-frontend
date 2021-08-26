@@ -29,6 +29,10 @@ export default function CreateARoom(): JSX.Element {
     if (
       !roomDetails.photos ||
       roomDetails.photos.length === 4 ||
+      !roomDetails.photos[0] ||
+      !roomDetails.photos[1] ||
+      !roomDetails.photos[2] ||
+      !roomDetails.photos[3] ||
       roomDetails.host_id === '' ||
       roomDetails.description === '' ||
       roomDetails.normal_price <= 0 ||

@@ -11,10 +11,16 @@ import { SITE_PAGES } from 'constants/pages.const';
 import { IMAGES } from 'constants/images.const';
 
 const defaultRoom: IRoomDetail = {
-  host_id: localStorage.getItem('userID') ?? '',
+  host_id: '',
   title: '',
   max_guest: 0,
-  address: { number: '', street: '', ward: '', district: '', city: '' },
+  address: {
+    number: '',
+    street: '',
+    ward: '',
+    district: '',
+    city: 'Ho_Chi_Minh',
+  },
   description: '',
   normal_price: 0,
   weekend_price: 0,
@@ -27,9 +33,6 @@ export default function CreateARoom(): JSX.Element {
 
   function checkData() {
     if (
-      !roomDetails.photos ||
-      roomDetails.photos.length === 4 ||
-      roomDetails.host_id === '' ||
       roomDetails.description === '' ||
       roomDetails.normal_price <= 0 ||
       roomDetails.weekend_price <= 0 ||
@@ -47,10 +50,20 @@ export default function CreateARoom(): JSX.Element {
   }
 
   async function createRoom() {
-    if (!checkData || !roomDetails.photos) return;
+    const hostID = localStorage.getItem('userID');
+    if (
+      !checkData ||
+      !roomDetails.photos ||
+      roomDetails.photos.length !== 4 ||
+      !hostID
+    )
+      return;
     try {
       setLoading(true);
-      const response = await POST(ENDPOINT_URL.POST.createRoom, roomDetails);
+      const response = await POST(ENDPOINT_URL.POST.createRoom, {
+        ...roomDetails,
+        host_id: hostID,
+      });
       if (response.status === 204) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
       console.log(error);
@@ -89,7 +102,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="number"
                 className="outline-none border rounded w-1/3 p-1"
-                defaultValue={roomDetails.normal_price ?? 0}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -103,7 +115,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="number"
                 className="outline-none border rounded w-1/3 p-1"
-                defaultValue={roomDetails.weekend_price ?? 0}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -118,7 +129,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="text"
                 className="outline-none border rounded w-1/2 p-1"
-                defaultValue={roomDetails.address.number}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -132,7 +142,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="text"
                 className="outline-none border rounded w-1/2 p-1"
-                defaultValue={roomDetails.address.street}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -146,7 +155,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="text"
                 className="outline-none border rounded w-1/2 p-1"
-                defaultValue={roomDetails.address.ward}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -160,7 +168,6 @@ export default function CreateARoom(): JSX.Element {
               <input
                 type="text"
                 className="outline-none border rounded w-1/2 p-1"
-                defaultValue={roomDetails.address.district}
                 onChange={(e) => {
                   setRoomDetails({
                     ...roomDetails,
@@ -213,10 +220,12 @@ export default function CreateARoom(): JSX.Element {
                 image={roomDetails.photos ? roomDetails.photos[0] : null}
                 setImage={(image) => {
                   let newPhotos: IImage[] = [];
-                  newPhotos.length = 4;
-                  if (roomDetails.photos)
+                  if (roomDetails.photos) {
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[0] = image;
+                    newPhotos[0] = image;
+                  } else {
+                    newPhotos.push(image);
+                  }
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
@@ -229,15 +238,22 @@ export default function CreateARoom(): JSX.Element {
                 image={roomDetails.photos ? roomDetails.photos[1] : null}
                 setImage={(image) => {
                   let newPhotos: IImage[] = [];
-                  newPhotos.length = 4;
-                  if (roomDetails.photos)
+                  if (roomDetails.photos) {
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[1] = image;
+                  }
+                  if (roomDetails.photos && roomDetails.photos.length <= 1) {
+                    newPhotos.push(image);
+                  } else {
+                    newPhotos[1] = image;
+                  }
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
                   });
                 }}
+                disable={
+                  roomDetails.photos ? roomDetails.photos.length < 1 : true
+                }
               />
             </div>
             <div className="w-1/2 h-1/2 p-2">
@@ -245,15 +261,22 @@ export default function CreateARoom(): JSX.Element {
                 image={roomDetails.photos ? roomDetails.photos[2] : null}
                 setImage={(image) => {
                   let newPhotos: IImage[] = [];
-                  newPhotos.length = 4;
-                  if (roomDetails.photos)
+                  if (roomDetails.photos) {
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[2] = image;
+                  }
+                  if (roomDetails.photos && roomDetails.photos.length <= 2) {
+                    newPhotos.push(image);
+                  } else {
+                    newPhotos[2] = image;
+                  }
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
                   });
                 }}
+                disable={
+                  roomDetails.photos ? roomDetails.photos.length < 2 : true
+                }
               />
             </div>
             <div className="w-1/2 h-1/2 p-2">
@@ -261,15 +284,22 @@ export default function CreateARoom(): JSX.Element {
                 image={roomDetails.photos ? roomDetails.photos[3] : null}
                 setImage={(image) => {
                   let newPhotos: IImage[] = [];
-                  newPhotos.length = 4;
-                  if (roomDetails.photos)
+                  if (roomDetails.photos) {
                     newPhotos = roomDetails.photos.slice();
-                  newPhotos[3] = image;
+                  }
+                  if (roomDetails.photos && roomDetails.photos.length <= 3) {
+                    newPhotos.push(image);
+                  } else {
+                    newPhotos[3] = image;
+                  }
                   setRoomDetails({
                     ...roomDetails,
                     photos: newPhotos.slice(),
                   });
                 }}
+                disable={
+                  roomDetails.photos ? roomDetails.photos.length < 3 : true
+                }
               />
             </div>
           </div>

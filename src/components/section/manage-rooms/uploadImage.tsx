@@ -1,9 +1,11 @@
+import { IImage } from 'interfaces/image.interface';
 import { useRef, useState } from 'react';
 import { BASE } from 'utils/fetcher.utils';
 
 interface Props {
   image: any;
   setImage: (image: any) => void;
+  disable?: boolean;
 }
 
 export default function UploadImage(props: Props): JSX.Element {
@@ -23,12 +25,14 @@ export default function UploadImage(props: Props): JSX.Element {
           props.setImage(reader.result as string);
         }
       };
-      if (uploaded.files[0] && uploaded.files[0].size <= 1024 * 1024) {
-        reader.readAsDataURL(uploaded.files[0]);
-      } else {
-        setMessage('Image must be under 1MB');
-        setPreview(null);
-        props.setImage('');
+      if (uploaded.files[0]) {
+        if (uploaded.files[0].size <= 1024 * 1024)
+          reader.readAsDataURL(uploaded.files[0]);
+        else {
+          setMessage('Please input image that under 1MB');
+          setPreview(null);
+          props.setImage('');
+        }
       }
     }
   }
@@ -43,12 +47,16 @@ export default function UploadImage(props: Props): JSX.Element {
           'border-dashed border-gray-200 text-gray-500',
         ].join(' ')}
         onClick={() => {
+          if (props.disable) {
+            setMessage('Please fill in the previous image before continue');
+            return;
+          }
           uploadImage.current?.click();
           uploadImage.current?.addEventListener('change', uploadAnImage);
         }}
       >
         {!preview ? (
-          <div className="py-8 text-sm">{message}</div>
+          <div className="py-8 text-sm text-center">{message}</div>
         ) : (
           <img
             src={preview}

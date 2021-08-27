@@ -35,9 +35,6 @@ export default function ViewARoom(): JSX.Element {
   function checkData() {
     if (
       !roomDetails ||
-      !roomDetails.photos ||
-      roomDetails.photos.length === 4 ||
-      roomDetails.host_id === '' ||
       roomDetails.description === '' ||
       roomDetails.normal_price <= 0 ||
       roomDetails.weekend_price <= 0 ||
@@ -55,7 +52,14 @@ export default function ViewARoom(): JSX.Element {
   }
 
   async function updateRoom() {
-    if (!checkData || !roomDetails || !roomDetails._id) return;
+    if (
+      !checkData ||
+      !roomDetails ||
+      !roomDetails.photos ||
+      roomDetails.photos.length !== 4 ||
+      !roomDetails._id
+    )
+      return;
     try {
       setLoading(true);
       const response = await PUT(

@@ -8,7 +8,7 @@ import { IRoomDetail } from 'interfaces/room.interface';
 import { UploadImage } from 'components/section/manage-rooms';
 import { SITE_PAGES } from 'constants/pages.const';
 import { IImage } from 'interfaces/image.interface';
-import { IMAGES } from 'constants/images.const';
+import { CITIES } from 'constants/cities.const';
 
 export default function ViewARoom(): JSX.Element {
   const location = useLocation();
@@ -62,10 +62,13 @@ export default function ViewARoom(): JSX.Element {
       return;
     try {
       setLoading(true);
-      const response = await PUT(
-        ENDPOINT_URL.PUT.updateRoom(roomDetails._id),
-        roomDetails,
-      );
+      const response = await PUT(ENDPOINT_URL.PUT.updateRoom(roomDetails._id), {
+        ...roomDetails,
+        address: {
+          ...roomDetails.address,
+          city: roomDetails.address.city.replaceAll(' ', '_'),
+        },
+      });
       if (response.data.valid) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
       console.log(error);
@@ -218,9 +221,9 @@ export default function ViewARoom(): JSX.Element {
                   })
                 }
               >
-                {IMAGES.map((option) => (
-                  <option value={option._id} key={option._id}>
-                    {option.title}
+                {CITIES.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
                   </option>
                 ))}
               </select>

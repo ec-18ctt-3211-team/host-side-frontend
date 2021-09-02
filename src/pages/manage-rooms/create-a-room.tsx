@@ -8,7 +8,7 @@ import { UploadImage } from 'components/section/manage-rooms';
 import { IImage } from 'interfaces/image.interface';
 import { useHistory } from 'react-router';
 import { SITE_PAGES } from 'constants/pages.const';
-import { IMAGES } from 'constants/images.const';
+import { CITIES } from 'constants/cities.const';
 
 const defaultRoom: IRoomDetail = {
   host_id: '',
@@ -19,7 +19,7 @@ const defaultRoom: IRoomDetail = {
     street: '',
     ward: '',
     district: '',
-    city: 'Ho_Chi_Minh',
+    city: 'Ho Chi Minh',
   },
   description: '',
   normal_price: 0,
@@ -63,6 +63,10 @@ export default function CreateARoom(): JSX.Element {
       const response = await POST(ENDPOINT_URL.POST.createRoom, {
         ...roomDetails,
         host_id: hostID,
+        address: {
+          ...roomDetails.address,
+          city: roomDetails.address.city.replaceAll(' ', '_'),
+        },
       });
       if (response.status === 204) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
@@ -187,13 +191,16 @@ export default function CreateARoom(): JSX.Element {
                 onChange={(e) =>
                   setRoomDetails({
                     ...roomDetails,
-                    address: { ...roomDetails.address, city: e.target.value },
+                    address: {
+                      ...roomDetails.address,
+                      city: e.target.value,
+                    },
                   })
                 }
               >
-                {IMAGES.map((option) => (
-                  <option value={option._id} key={option._id}>
-                    {option.title}
+                {CITIES.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
                   </option>
                 ))}
               </select>

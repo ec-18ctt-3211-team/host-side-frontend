@@ -14,9 +14,11 @@ export default function ListOfRooms(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(0);
   const [rooms, setRooms] = useState<IRoomDetail[]>();
   const [maxPages, setMaxPages] = useState<number>(1);
+  const [loading, setLoading] = useState(false);
 
   async function fetchRooms() {
     try {
+      setLoading(true);
       const host_id = localStorage.getItem('userID');
       if (host_id === null) {
         history.push('/');
@@ -30,6 +32,8 @@ export default function ListOfRooms(): JSX.Element {
       setMaxPages(Math.max(Math.ceil(response.data.total / LIMIT), 1));
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -39,7 +43,7 @@ export default function ListOfRooms(): JSX.Element {
 
   return (
     <Layout>
-      {rooms ? (
+      {!loading && rooms ? (
         <div className="h-full w-full p-4 bg-white flex flex-col justify-center items-center rounded-lg">
           <div className="flex w-full justify-end h-12 p-1">
             <button
@@ -54,7 +58,7 @@ export default function ListOfRooms(): JSX.Element {
               Create Room
             </button>
           </div>
-          <div className="flex flex-wrap w-full">
+          <div className="flex flex-wrap justify-center w-full overflow-auto">
             {rooms.map((room, index) => (
               <RoomCard detail={room} key={index} />
             ))}

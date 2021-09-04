@@ -17,6 +17,7 @@ export default function HostInfomation(): JSX.Element {
       const response = await GET(ENDPOINT_URL.GET.getCustomerByID(userID));
       if (response.data.valid) {
         setUserInfo({ ...response.data.customer, password: '' });
+        localStorage.setItem('username', response.data.customer.name);
       }
     } catch (error) {
       alert('Unexpected error, please try again!');

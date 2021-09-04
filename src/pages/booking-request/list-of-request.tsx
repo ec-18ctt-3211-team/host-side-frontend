@@ -37,6 +37,7 @@ export default function ListOfRequest(): JSX.Element {
         );
       }
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -61,6 +62,7 @@ export default function ListOfRequest(): JSX.Element {
         setOrders(newOrders.slice());
       }
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);

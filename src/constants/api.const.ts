@@ -1,3 +1,6 @@
+export const emailValidRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]*$/;
+
 export const ENDPOINT_URL = {
   GET: {
     getAllOrders: (host_id: string, limit: number, page: number) =>

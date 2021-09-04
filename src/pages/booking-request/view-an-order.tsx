@@ -3,7 +3,6 @@ import { ENDPOINT_URL } from 'constants/api.const';
 import { IOrder } from 'interfaces/order.interface';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { getDateString } from 'utils/datetime.utils';
 import { GET } from 'utils/fetcher.utils';
 
 export default function ViewAnOrder(): JSX.Element {
@@ -18,6 +17,7 @@ export default function ViewAnOrder(): JSX.Element {
         setOrder(response.data.order);
       }
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     }
   }
@@ -30,7 +30,7 @@ export default function ViewAnOrder(): JSX.Element {
     <Layout>
       {order ? (
         <div className="h-full w-full p-8 bg-white flex rounded-lg">
-          <div className="w-1/2 px-12">
+          <div className="w-1/2 px-8">
             <div className="uppercase font-bold text-xl text-brown-500">
               customer information
             </div>
@@ -55,26 +55,36 @@ export default function ViewAnOrder(): JSX.Element {
             </div>
             <div className="px-8 border-b uppercase text-center">Paypal</div>
           </div>
-          <div className="w-1/2 px-12">
+          <div className="w-1/2 px-8">
             <div className="uppercase font-bold text-xl text-brown-500">
               booking information
             </div>
             <div className="uppercase font-bold text-base px-4 pt-4 pb-2 text-brown-400">
               number of guest:
             </div>
-            <div className="flex p-4">
-              <div className="px-8 border-b">{order.num_adult}</div>
-              <div className="px-4 uppercase">adult(s)</div>
-              <div className="px-8 border-b">{order.num_kid}</div>
-              <div className="px-4 uppercase">kid(s)</div>
-            </div>
-            <div className="flex p-4">
-              <div className="pr-4 uppercase font-bold text-brown-400">
-                from
+            <div className="flex flex-col p-4">
+              <div className="flex">
+                <div className="px-4 border-b">{order.num_adult}</div>
+                <div className="px-4 uppercase">adult(s)</div>
               </div>
-              <div className="px-4 border-b">{order.day_start}</div>
-              <div className="px-4 uppercase font-bold text-brown-400">to</div>
-              <div className="px-4 border-b">{order.day_end}</div>
+              <div className="flex">
+                <div className="px-4 border-b">{order.num_kid}</div>
+                <div className="px-4 uppercase">kid(s)</div>
+              </div>
+            </div>
+            <div className="flex flex-col p-4">
+              <div className="flex flex-wrap justify-between py-2">
+                <div className="uppercase font-bold text-brown-400">
+                  from date
+                </div>
+                <div className="border-b">{order.day_start}</div>
+              </div>
+              <div className="flex flex-wrap justify-between py-2">
+                <div className="uppercase font-bold text-brown-400">
+                  to date
+                </div>
+                <div className="border-b">{order.day_end}</div>
+              </div>
             </div>
           </div>
         </div>

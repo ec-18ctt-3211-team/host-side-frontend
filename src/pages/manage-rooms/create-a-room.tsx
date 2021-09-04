@@ -1,5 +1,5 @@
 import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
-import { Icon, editSolid } from 'utils/icon.utils';
+import { Icon, Solid } from 'utils/icon.utils';
 import { useState } from 'react';
 import { POST } from 'utils/fetcher.utils';
 import { ENDPOINT_URL } from 'constants/api.const';
@@ -31,7 +31,8 @@ export default function CreateARoom(): JSX.Element {
   const [roomDetails, setRoomDetails] = useState<IRoomDetail>(defaultRoom);
   const [loading, setLoading] = useState(false);
 
-  function checkData() {
+  async function createRoom() {
+    const hostID = localStorage.getItem('userID');
     if (
       roomDetails.description === '' ||
       roomDetails.normal_price <= 0 ||
@@ -42,22 +43,14 @@ export default function CreateARoom(): JSX.Element {
       roomDetails.address.street === '' ||
       roomDetails.address.ward === '' ||
       roomDetails.address.district === '' ||
-      roomDetails.address.city === ''
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  async function createRoom() {
-    const hostID = localStorage.getItem('userID');
-    if (
-      !checkData ||
+      roomDetails.address.city === '' ||
       !roomDetails.photos ||
       roomDetails.photos.length !== 4 ||
       !hostID
-    )
+    ) {
+      alert('All fields must be fill');
       return;
+    }
     try {
       setLoading(true);
       const response = await POST(ENDPOINT_URL.POST.createRoom, {
@@ -70,6 +63,7 @@ export default function CreateARoom(): JSX.Element {
       });
       if (response.status === 204) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -85,7 +79,7 @@ export default function CreateARoom(): JSX.Element {
               <Input
                 border="line"
                 type="text"
-                icon={{ icon: <Icon icon={editSolid} />, position: 'right' }}
+                icon={{ icon: <Icon icon={Solid.edit} />, position: 'right' }}
                 value={roomDetails?.title}
                 onChange={(e) =>
                   setRoomDetails({ ...roomDetails, title: e.target.value })

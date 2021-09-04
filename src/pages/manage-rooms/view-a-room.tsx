@@ -1,5 +1,5 @@
 import { Layout, Input, InputNumber, Loading, Button } from 'components/common';
-import { Icon, editSolid, binSolid } from 'utils/icon.utils';
+import { Icon, Solid } from 'utils/icon.utils';
 import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { DELETE, GET, PUT } from 'utils/fetcher.utils';
@@ -26,13 +26,14 @@ export default function ViewARoom(): JSX.Element {
         setRoomDetails(response.data.room);
       }
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
     }
   }
 
-  function checkData() {
+  async function updateRoom() {
     if (
       !roomDetails ||
       roomDetails.description === '' ||
@@ -44,22 +45,14 @@ export default function ViewARoom(): JSX.Element {
       roomDetails.address.street === '' ||
       roomDetails.address.ward === '' ||
       roomDetails.address.district === '' ||
-      roomDetails.address.city === ''
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  async function updateRoom() {
-    if (
-      !checkData ||
-      !roomDetails ||
+      roomDetails.address.city === '' ||
       !roomDetails.photos ||
       roomDetails.photos.length !== 4 ||
       !roomDetails._id
-    )
+    ) {
+      alert('All fields must be fill');
       return;
+    }
     try {
       setLoading(true);
       const response = await PUT(ENDPOINT_URL.PUT.updateRoom(roomDetails._id), {
@@ -69,8 +62,9 @@ export default function ViewARoom(): JSX.Element {
           city: roomDetails.address.city.replaceAll(' ', '_'),
         },
       });
-      if (response.data.valid) history.push(SITE_PAGES.MANAGE_ROOMS.path);
+      if (response.data.valid) fetchRoom();
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -86,6 +80,7 @@ export default function ViewARoom(): JSX.Element {
       );
       if (response.status === 204) history.push(SITE_PAGES.MANAGE_ROOMS.path);
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -105,7 +100,7 @@ export default function ViewARoom(): JSX.Element {
               <Input
                 border="line"
                 type="text"
-                icon={{ icon: <Icon icon={editSolid} />, position: 'right' }}
+                icon={{ icon: <Icon icon={Solid.edit} />, position: 'right' }}
                 value={roomDetails?.title}
                 onChange={(e) =>
                   setRoomDetails({ ...roomDetails, title: e.target.value })
@@ -246,7 +241,7 @@ export default function ViewARoom(): JSX.Element {
               </div>
               <div className="p-2 w-1/3">
                 <Button onClick={() => deleteRoom()}>
-                  <Icon icon={binSolid} />
+                  <Icon icon={Solid.bin} />
                 </Button>
               </div>
             </div>

@@ -31,6 +31,7 @@ export default function ListOfRooms(): JSX.Element {
       setRooms(response.data.rooms);
       setMaxPages(Math.max(Math.ceil(response.data.total / LIMIT), 1));
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -44,7 +45,7 @@ export default function ListOfRooms(): JSX.Element {
   return (
     <Layout>
       {!loading && rooms ? (
-        <div className="h-full w-full p-4 bg-white flex flex-col justify-center items-center rounded-lg">
+        <div className="min-h-full w-full p-4 bg-white flex flex-col justify-center items-center rounded-lg">
           <div className="flex w-full justify-end h-12 p-1">
             <button
               className={[
@@ -58,10 +59,12 @@ export default function ListOfRooms(): JSX.Element {
               Create Room
             </button>
           </div>
-          <div className="flex flex-wrap justify-center w-full overflow-auto">
-            {rooms.map((room, index) => (
-              <RoomCard detail={room} key={index} />
-            ))}
+          <div className="flex w-full justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {rooms.map((room, index) => {
+                return <RoomCard detail={room} key={index} />;
+              })}
+            </div>
           </div>
           <div className="mt-auto">
             <Pagination

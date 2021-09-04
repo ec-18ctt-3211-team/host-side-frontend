@@ -1,19 +1,13 @@
 import { Layout, Form, Loading } from 'components/common';
-import { ENDPOINT_URL } from 'constants/api.const';
+import { ENDPOINT_URL, emailValidRegex } from 'constants/api.const';
 import { IUserInfo } from 'interfaces/user.interface';
 import { useEffect, useState } from 'react';
 import { GET, PUT } from 'utils/fetcher.utils';
 
 export default function HostInfomation(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
-  const [userInfo, setUserInfo] = useState<IUserInfo>({
-    userID: '12345',
-    username: 'Default',
-    phone_number: '0123456789',
-    email: 'ngocnhi123@gmail.com',
-    citizen_id: '01010101',
-    password: '1',
-  });
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+  const [message, setMessage] = useState('');
 
   async function fetchUserInfo() {
     const userID = localStorage.getItem('userID');
@@ -22,15 +16,10 @@ export default function HostInfomation(): JSX.Element {
       setLoading(true);
       const response = await GET(ENDPOINT_URL.GET.getCustomerByID(userID));
       if (response.data.valid) {
-        setUserInfo({ ... userInfo,
-          userID: response.data.customer._id,
-          username: response.data.customer.name,
-          phone_number: response.data.customer.phone,
-          email: response.data.customer.email,
-          citizen_id: response.data.customer.ci,
-        });
+        setUserInfo({ ...response.data.customer, password: '' });
       }
     } catch (error) {
+      alert('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -39,26 +28,39 @@ export default function HostInfomation(): JSX.Element {
 
   async function updateProfile() {
     if (!userInfo) return;
-    if (!userInfo.password || userInfo.password === ''){
-      window.alert('Please enter your current or new password');
+    if (
+      !userInfo.email.match(emailValidRegex) ||
+      !userInfo.email_paypal.match(emailValidRegex)
+    ) {
+      setMessage('Please input valid email');
+      return;
+    }
+    if (!userInfo.phone.match(/[0-9]/)) {
+      setMessage('Please input valid phone number');
+      return;
     }
     try {
       setLoading(true);
-      const payload = {
-        email: userInfo.email,
-        name: userInfo.username,
-        password: userInfo.password,
-        phone: userInfo.phone_number,
-      };
-      console.log(userInfo.userID);
+      const payload = new URLSearchParams();
+      if (userInfo.email !== '') payload.append('email', userInfo.email);
+      if (userInfo.email_paypal !== '')
+        payload.append('email_paypal', userInfo.email_paypal);
+      if (userInfo.name !== '') payload.append('name', userInfo.name);
+      if (userInfo.password !== '')
+        payload.append('password', userInfo.password);
+      if (userInfo.phone !== '') payload.append('phone', userInfo.phone);
+      if (userInfo.ci && userInfo.ci !== '') payload.append('ci', userInfo.ci);
+
       const response = await PUT(
-        ENDPOINT_URL.PUT.updateCustomerByID(userInfo.userID),
+        ENDPOINT_URL.PUT.updateCustomerByID(userInfo._id),
         payload,
       );
       if (response.data.valid) {
         fetchUserInfo();
+        setMessage('');
       }
     } catch (error) {
+      setMessage('Unexpected error, please try again!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -71,21 +73,22 @@ export default function HostInfomation(): JSX.Element {
 
   return (
     <Layout>
-      {!loading ? (
-        <div className="h-full w-full bg-white flex items-center justify-center rounded-lg">
-          <div className="h-full py-6 w-2/5">
+      {!loading && userInfo ? (
+        <div className="h-full w-full flex items-center justify-center">
+          <div className="w-4/5 lg:w-3/5 xl:2/5 h-full">
             <Form
-              type = 'Info'
-              title="Host profile"
+              title="User profile"
+              type="profile"
+              button={{ label: 'Update', onClick: updateProfile }}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
-              button={{ label: 'Update', onClick: updateProfile }}
+              message={message}
             />
           </div>
         </div>
       ) : (
         <Loading />
-      )}    
+      )}
     </Layout>
   );
 }

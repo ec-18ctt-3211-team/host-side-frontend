@@ -1,4 +1,4 @@
-import { Icon, addSmallOutline, minusSmallOutline } from 'utils/icon.utils';
+import { Icon, Outline } from 'utils/icon.utils';
 
 interface Props {
   label: string;
@@ -17,7 +17,7 @@ export default function InputNumber(props: Props): JSX.Element {
         ].join(' ')}
         onClick={() => value > 0 && setValue(value - 1)}
       >
-        <Icon icon={minusSmallOutline} />
+        <Icon icon={Outline.minus} />
       </div>
       <div>
         {value} {props.label}
@@ -29,7 +29,7 @@ export default function InputNumber(props: Props): JSX.Element {
         ].join(' ')}
         onClick={() => setValue(value + 1)}
       >
-        <Icon icon={addSmallOutline} />
+        <Icon icon={Outline.add} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import { InlineIcon, searchOutline } from 'utils/icon.utils';
+import { InlineIcon, Outline } from 'utils/icon.utils';
 
 export default function Searchbar(): JSX.Element {
   return (
@@ -11,7 +11,7 @@ export default function Searchbar(): JSX.Element {
         classname="shadow-md"
         icon={{
           icon: (
-            <InlineIcon icon={searchOutline} style={{ fontSize: 'inherit' }} />
+            <InlineIcon icon={Outline.search} style={{ fontSize: 'inherit' }} />
           ),
           position: 'left',
         }}

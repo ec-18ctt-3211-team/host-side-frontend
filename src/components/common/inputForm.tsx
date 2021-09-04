@@ -1,43 +1,44 @@
-import { Button, Input } from '.';
-import {
-  Icon,
-  envelopeOutline,
-  userSolid,
-  phoneOutline,
-  passwordOutline,
-  idSolid,
-} from 'utils/icon.utils';
-import { useState } from 'react';
+import { Button, formType, Input } from '.';
+import { Icon, Outline, Solid } from 'utils/icon.utils';
+import { useEffect, useState } from 'react';
 import { IUserInfo } from 'interfaces/user.interface';
 
 interface Props {
-  type: 'Info'| 'LogIn';
   title: string;
+  type: formType;
   userInfo: IUserInfo;
   setUserInfo: (user: IUserInfo) => void;
   button: { label: string; onClick: () => void };
-  create_an_account?: () => void;
   message?: string;
 }
 
 export default function Form(props: Props): JSX.Element {
   const [password, setPassword] = useState('');
-  const [isMatched, setMatched] = useState<boolean>(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isMatched, setMatched] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (password === confirmPassword) {
+      setMatched(true);
+      props.setUserInfo({ ...props.userInfo, password });
+    }
+  }, [password, confirmPassword]);
 
   return (
-    <div className="bg-white rounded-xl h-full w-full flex flex-col justify-between items-center p-6 select-none">
+    <div className="bg-white rounded-xl shadow-lg h-full w-full flex flex-col justify-between items-center p-6 select-none">
       <div className="uppercase font-bold text-brown text-xl">
         {props.title}
       </div>
-      <div className="text-xs pb-3 pt-1">{props.userInfo.userID}</div>
+      {props.type === 'profile' && (
+        <div className="text-xs pb-3 pt-1">{props.userInfo._id}</div>
+      )}
       {/* email */}
       <div className="py-2 h-full">
         <Input
           border="full"
           type="text"
           placeholder="email"
-          classname="py-2"
-          icon={{ icon: <Icon icon={envelopeOutline} />, position: 'right' }}
+          icon={{ icon: <Icon icon={Outline.envelope} />, position: 'right' }}
           value={props.userInfo.email}
           onChange={(e) =>
             props.setUserInfo({ ...props.userInfo, email: e.target.value })
@@ -46,134 +47,125 @@ export default function Form(props: Props): JSX.Element {
       </div>
 
       {/* full name */}
-      {props.type === 'Info' &&
+      {props.type !== 'login' && (
         <div className="py-2 h-full">
           <Input
             border="full"
             type="text"
             placeholder="full name"
-            icon={{ icon: <Icon icon={userSolid} />, position: 'right' }}
-            value={props.userInfo.username}
+            icon={{ icon: <Icon icon={Solid.user} />, position: 'right' }}
+            value={props.userInfo.name}
             onChange={(e) =>
               props.setUserInfo({
                 ...props.userInfo,
-                username: e.target.value,
+                name: e.target.value,
               })
             }
           />
         </div>
-      }
+      )}
 
       {/* phone number */}
-      {props.type === 'Info' &&
+      {props.type !== 'login' && (
         <div className="py-2 h-full">
           <Input
             border="full"
             type="text"
             placeholder="phone number"
-            icon={{ icon: <Icon icon={phoneOutline} />, position: 'right' }}
-            value={props.userInfo.phone_number}
+            icon={{ icon: <Icon icon={Outline.phone} />, position: 'right' }}
+            value={props.userInfo.phone}
             onChange={(e) =>
               props.setUserInfo({
                 ...props.userInfo,
-                phone_number: e.target.value,
+                phone: e.target.value,
               })
             }
           />
         </div>
-      }
+      )}
 
-      {/* citizen id */}
-      {props.type === 'Info' &&
+      {/* paypal email */}
+      {props.type === 'profile' && (
         <div className="py-2 h-full">
           <Input
             border="full"
             type="text"
-            placeholder="citizen id"
-            icon={{ icon: <Icon icon={idSolid} />, position: 'right' }}
-            value={props.userInfo.citizen_id}
+            placeholder="paypal email"
+            icon={{ icon: <Icon icon={Outline.envelope} />, position: 'right' }}
+            value={props.userInfo.email_paypal}
             onChange={(e) =>
               props.setUserInfo({
                 ...props.userInfo,
-                citizen_id: e.target.value,
+                email_paypal: e.target.value,
               })
             }
           />
         </div>
-      }
+      )}
 
-      {/* new password */}
-      {props.type === 'Info' &&
+      {/* citizen id */}
+      {props.type === 'profile' && (
         <div className="py-2 h-full">
           <Input
             border="full"
-            type="password"
-            placeholder="password"
-            classname="py-2"
-            icon={{ icon: <Icon icon={passwordOutline} />, position: 'right' }}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      }
-      {props.type === 'LogIn' &&
-        <div className="py-2 h-full">
-          <Input
-            border="full"
-            type="password"
-            placeholder="password"
-            classname="py-2"
-            icon={{ icon: <Icon icon={passwordOutline} />, position: 'right' }}
-            value={password}
+            type="text"
+            placeholder="citizen ID"
+            icon={{ icon: <Icon icon={Solid.id} />, position: 'right' }}
+            value={props.userInfo.ci}
             onChange={(e) =>
               props.setUserInfo({
                 ...props.userInfo,
-                password: e.target.value,
-              })}
+                ci: e.target.value,
+              })
+            }
           />
         </div>
-      }
+      )}
+
+      {/* new password */}
+      <div className="py-2 h-full">
+        <Input
+          border="full"
+          type="password"
+          placeholder={props.type === 'profile' ? 'new password' : 'password'}
+          icon={{ icon: <Icon icon={Outline.password} />, position: 'right' }}
+          value={password}
+          onChange={(e) => {
+            if (props.type === 'login')
+              props.setUserInfo({
+                ...props.userInfo,
+                password: e.target.value,
+              });
+            else setPassword(e.target.value);
+          }}
+        />
+      </div>
 
       {/* confirm password */}
-      {props.type === 'Info' &&
+      {props.type !== 'login' && (
         <div className="py-2 h-full">
           <Input
             border="full"
             type="password"
             placeholder="confirm password"
-            icon={{ icon: <Icon icon={passwordOutline} />, position: 'right' }}
+            icon={{ icon: <Icon icon={Outline.password} />, position: 'right' }}
             onChange={(e) => {
-              if (password === e.target.value && password !== '') {
-                setMatched(true);
-                props.setUserInfo({
-                  ...props.userInfo,
-                  password: e.target.value,
-                });
-              } else setMatched(false);
+              setConfirmPassword(e.target.value);
             }}
           />
         </div>
-      }
+      )}
 
       {/* button */}
-      {props.type === 'Info' &&
-        <div className="py-2 h-full w-full flex justify-center items-center">
-          {isMatched && password !== '' ? (
-            <Button onClick={props.button.onClick} className="w-2/3 h-full">
-              {props.button.label}
-            </Button>
-          ) : (
-            <div className="text-xs text-error">Passwords is not enter or is not matched</div>
-          )}
-        </div>
-      }
-      {props.type === 'LogIn' &&
-        <div className="py-2 w-full h-full flex justify-center items-center">
-          <Button onClick={props.button.onClick} className="w-2/3 h-full py-2">
+      <div className="py-2 h-full w-full flex justify-center items-center">
+        {isMatched ? (
+          <Button onClick={props.button.onClick} className="w-2/3 h-full">
             {props.button.label}
           </Button>
-        </div>
-      }
+        ) : (
+          <div className="text-xs text-error">Passwords is not matched</div>
+        )}
+      </div>
 
       {props.message && (
         <div className="text-xs text-error">{props.message}</div>

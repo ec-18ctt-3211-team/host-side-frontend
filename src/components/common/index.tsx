@@ -16,7 +16,7 @@ import Loading from './loading';
 export type borderType = 'full' | 'line';
 export type inputType = 'text' | 'password';
 export type positionType = 'left' | 'right' | 'top' | 'bottom';
-// export type formType = 'login' | 'signup' | 'profile';
+export type formType = 'login' | 'signup' | 'profile';
 
 export {
   Button,

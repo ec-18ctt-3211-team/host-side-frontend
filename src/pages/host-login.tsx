@@ -45,10 +45,12 @@ export default function HostLogin() {
 
         setMessage('');
 
-        if (response.data.set_up) {
+        if (!response.data.step_up) {
           history.push(SITE_PAGES.HOST_INFORMATION.path);
           alert('Please fill in your paypal email and citizen ID');
-        } else history.push(SITE_PAGES.MANAGE_ROOMS.path);
+        } else {
+          history.push(SITE_PAGES.MANAGE_ROOMS.path);
+        }
       }
     } catch (error: any) {
       if (error.response?.data?.message)

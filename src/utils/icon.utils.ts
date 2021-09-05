@@ -14,6 +14,7 @@ import idSolid from '@iconify/icons-teenyicons/id-solid';
 import editSolid from '@iconify/icons-teenyicons/edit-solid';
 import logoutOutline from '@iconify/icons-teenyicons/logout-outline';
 import binSolid from '@iconify/icons-teenyicons/bin-solid';
+import paypalSolid from '@iconify/icons-teenyicons/paypal-solid';
 
 const Outline = {
   left: leftSmallOutline,
@@ -34,6 +35,7 @@ const Solid = {
   id: idSolid,
   edit: editSolid,
   bin: binSolid,
+  paypal: paypalSolid,
 };
 
 export { Icon, InlineIcon, Outline, Solid };

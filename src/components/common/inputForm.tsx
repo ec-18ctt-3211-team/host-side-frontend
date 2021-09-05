@@ -21,6 +21,8 @@ export default function Form(props: Props): JSX.Element {
     if (password === confirmPassword) {
       setMatched(true);
       props.setUserInfo({ ...props.userInfo, password });
+    } else {
+      setMatched(false);
     }
   }, [password, confirmPassword]);
 
@@ -91,7 +93,7 @@ export default function Form(props: Props): JSX.Element {
             border="full"
             type="text"
             placeholder="paypal email"
-            icon={{ icon: <Icon icon={Outline.envelope} />, position: 'right' }}
+            icon={{ icon: <Icon icon={Solid.paypal} />, position: 'right' }}
             value={props.userInfo.email_paypal}
             onChange={(e) =>
               props.setUserInfo({

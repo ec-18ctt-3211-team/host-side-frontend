@@ -44,7 +44,11 @@ export default function HostLogin() {
         localStorage.setItem('userImg', BASE + response.data.ava);
 
         setMessage('');
-        history.push(SITE_PAGES.MANAGE_ROOMS.path);
+
+        if (response.data.set_up) {
+          history.push(SITE_PAGES.HOST_INFORMATION.path);
+          alert('Please fill in your paypal email and citizen ID');
+        } else history.push(SITE_PAGES.MANAGE_ROOMS.path);
       }
     } catch (error: any) {
       if (error.response?.data?.message)

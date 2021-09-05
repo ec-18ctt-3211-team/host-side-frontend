@@ -1,6 +1,4 @@
-import { IImage } from 'interfaces/image.interface';
 import { useRef, useState } from 'react';
-import { BASE } from 'utils/fetcher.utils';
 
 interface Props {
   image: any;
